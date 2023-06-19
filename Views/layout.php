@@ -15,9 +15,6 @@
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">   
                         <li class="scroll-to-section"><a href="#top" class="active">Inicio</a></li>
-                            <li class="scroll-to-section"><a href="#men">Hombres</a></li>
-                            <li class="scroll-to-section"><a href="#women">Mujeres</a></li>
-                            <li class="scroll-to-section"><a href="#kids">Niños</a></li>
                             <li class="submenu">
                                 <a href="javascript:;">Páginas</a>
                                 <ul>
@@ -28,16 +25,17 @@
                                 </ul>
                             </li>
                             <li class="submenu">
-                                <a href="javascript:;">Opciones</a>
+                                <a href="javascript:;">Categorías</a>
                                 <ul>
-                                    <li><a href="#">Opción 1</a></li>
-                                    <li><a href="#">Opción 2</a></li>
-                                    <li><a href="#">Opción 3</a></li>
-                                    <li><a rel="nofollow" href="https://templatemo.com/page/4" target="_blank">Template Page 4</a></li>
+                                <li class="scroll-to-section"><a href="#men">Hombres</a></li>
+                            <li class="scroll-to-section"><a href="#women">Mujeres</a></li>
+                            <li class="scroll-to-section"><a href="#kids">Niños</a></li>
+                                    
                                 </ul>
                             </li>
                             <li class="scroll-to-section"><a href="#explore">Cuenta</a></li>
                             <li class="scroll-to-section"><a href="#explore">Tipo de Perfil</a></li>
+                            <li class="scroll-to-section"><a href="carrito.php">Carrito</a></li>
                         </ul>        
                         <a class='menu-trigger'>
                             <span>Menu</span>
