@@ -81,7 +81,7 @@
                     <ul>
                         <li><a href="#">Inicio</a></li>
                         <li><a href="#">Sobre Nosotros</a></li>
-                        <li><a href="#">Ayuda</a></li>
+                        <li><a href="#">Prodcutos</a></li>
                         
                     </ul>
                 </div>
@@ -90,6 +90,7 @@
                     <ul>
                         <li><a href="#">Cuenta</a></li>
                         <li><a href="#">Cambiar contraseña</a></li>
+                        <li><a href="#">Carrito</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-12">
