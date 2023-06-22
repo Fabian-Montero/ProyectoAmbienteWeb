@@ -6,7 +6,7 @@ function RegistrarUsuario($Correo, $Nombre, $Apellidos, $Pais, $Ciudad, $Direcc�
 {
     try {
         $enlace = OpenBD();
-        $sentecia = "CALL RegistrarUsuario('$Correo','$Nombre','$Apellidos','$Pais','$Ciudad','$Direccón','$Contrasenna')";
+        $sentecia = "CALL RegistrarUsuario('$Nombre','$Apellidos','$Correo','$Direccón','$Ciudad','$Pais','$Contrasenna' )";
         $respuesta = $enlace->query($sentecia);
         CloseBD($enlace);
 
