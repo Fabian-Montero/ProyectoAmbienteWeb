@@ -1,7 +1,12 @@
 <?php
-    function mostrarHeader(){
-        ?>
-        <!-- ***** Header Area Start ***** -->
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+function mostrarHeader()
+{
+?>
+    <!-- ***** Header Area Start ***** -->
     <header class="header-area header-sticky">
         <div class="container">
             <div class="row">
@@ -13,30 +18,31 @@
                         </a>
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
-                        <ul class="nav">   
-                        <li class="scroll-to-section"><a href="#top" class="active">Inicio</a></li>
+                        <ul class="nav">
+                            <li class="scroll-to-section"><a href="#top" class="active">Inicio</a></li>
                             <li class="submenu">
                                 <a href="javascript:;">Páginas</a>
                                 <ul>
                                     <li><a href="about.php">Sobre Nosotros</a></li>
                                     <li><a href="products.php">Productos</a></li>
                                     <li><a href="single-product.php">Producto</a></li>
-                                    
+
                                 </ul>
                             </li>
                             <li class="submenu">
                                 <a href="javascript:;">Categorías</a>
                                 <ul>
-                                <li class="scroll-to-section"><a href="#men">Hombres</a></li>
-                            <li class="scroll-to-section"><a href="#women">Mujeres</a></li>
-                            <li class="scroll-to-section"><a href="#kids">Niños</a></li>
-                                    
+                                    <li class="scroll-to-section"><a href="#men">Hombres</a></li>
+                                    <li class="scroll-to-section"><a href="#women">Mujeres</a></li>
+                                    <li class="scroll-to-section"><a href="#kids">Niños</a></li>
+
                                 </ul>
                             </li>
                             <li class="scroll-to-section"><a href="#explore">Cuenta</a></li>
                             <li class="scroll-to-section"><a href="#explore">Tipo de Perfil</a></li>
                             <li class="scroll-to-section"><a href="carrito.php">Carrito</a></li>
-                        </ul>        
+                        </ul>
+
                         <a class='menu-trigger'>
                             <span>Menu</span>
                         </a>
@@ -55,9 +61,13 @@
 
 
 <?php
-    function mostrarFooter(){
-        ?>
-        <!-- ***** Footer Start ***** -->
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+function mostrarFooter()
+{
+?>
+    <!-- ***** Footer Start ***** -->
     <footer>
         <div class="container">
             <div class="row">
@@ -82,7 +92,7 @@
                         <li><a href="#">Inicio</a></li>
                         <li><a href="#">Sobre Nosotros</a></li>
                         <li><a href="#">Prodcutos</a></li>
-                        
+
                     </ul>
                 </div>
                 <div class="col-lg-3">
@@ -95,14 +105,14 @@
                 </div>
                 <div class="col-lg-12">
                     <div class="under-footer">
-                        <p>Universidad Fidélitas. Proyecto Ambiente Web / Cliente Servidor 
-                        
+                        <p>Universidad Fidélitas. Proyecto Ambiente Web / Cliente Servidor
+
                     </div>
                 </div>
             </div>
         </div>
     </footer>
 
-    <?php
-    }
+<?php
+}
 ?>
