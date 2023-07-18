@@ -63,6 +63,14 @@
         $sentecia = "CALL ActualizarClaveCliente('$id', '$codigoSeguridad')";
         $enlace -> query($sentecia);
         CloseBD($enlace);
-    }    
+    }  
+    
+    function ActualizarContrasenna($id, $contrasenna)
+    {
+        $enlace = OpenBD();
+        $sentecia = "CALL ActualizarContrasenna('$id', '$contrasenna')";
+        $enlace -> query($sentecia);
+        CloseBD($enlace);
+    } 
 
 ?>

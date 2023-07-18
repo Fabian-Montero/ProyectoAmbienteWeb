@@ -32,8 +32,16 @@
         {
             $datos = mysqli_fetch_array($respuesta);
 
-            $_SESSION["NombreUsuario"] = $datos["nombre"];
-            header("location: ../Views/home.php");
+            if ($datos["contrasenna_temporal"] == 1)
+            {
+                header("location: ../Views/cambiarContrasenna.php?q=" . $Correo);
+            }else 
+            {
+                $_SESSION["NombreUsuario"] = $datos["nombre"];
+                header("location: ../Views/home.php");
+            }
+
+            
         }
         else
         {
@@ -56,14 +64,40 @@
 
             $mensaje = "<html><body>
                         Estimado(a)" . $datos["Nombre"] . "<br/>
-                        Se ha generado el siguente código de seguridad: <b>" . $codigoSeguridad . "</b><br/>
-                        Recuerde realizar el cambio de contraseña una vez que ingrese al sistema<br/><br/>
+                        Se ha generado la siguiente clave temporal: <b>" . $codigoSeguridad . "</b><br/>
+                        Recuerde iniciar sesión con esta contraseña para realizar el debido cambio<br/><br/>
                         Muchas gracias.
                         </body></html>";
 
             EnviarCorreo($Correo, 'Recuperar Contraseña', $mensaje);
             ActualizarCodigo($datos["id"], $codigoSeguridad);
-            header("location: ../Views/confirmarClave.php");
+            header("location: ../Views/login.php");
+        }
+        else
+        {
+            $_POST["MsjPantalla"] = "No se ha podido recuperar su información";
+        }
+    }
+    function cerrarSesion()
+    {
+        echo "Prueba PHP";
+        session_destroy();
+        header("location: ../Views/login.php");
+    }
+    
+    if(isset($_POST["btnCambiarContrasenna"]))
+    {
+        $correo = $_POST["txtCorreo"];
+        $contrasenna = $_POST["txtContrasenna"];
+        $respuesta = ConsultarDatos($correo);
+        
+
+        if($respuesta -> num_rows > 0)
+        {
+            $datos = mysqli_fetch_array($respuesta);
+            
+            ActualizarContrasenna($datos["id"], $contrasenna);
+            header("location: ../Views/home.php");
         }
         else
         {
@@ -71,17 +105,12 @@
         }
     }
 
-    if(isset($_POST["btnCerrarSesion"]))
-    {
-        session_destroy();
-        header("location: ../Views/login.php");
-    }
 
     function randomPassword() {
-        $alphabet = '1234567890';
+        $alphabet = '1234567890abcdefghijklmnopqrstuvwxyz';
         $pass = array();
         $alphaLength = strlen($alphabet) - 1;
-        for ($i = 0; $i < 4; $i++) {
+        for ($i = 0; $i < 8; $i++) {
             $n = rand(0, $alphaLength);
             $pass[] = $alphabet[$n];
         }

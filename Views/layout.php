@@ -30,15 +30,15 @@ function mostrarHeader()
                                 </ul>
                             </li>
                             <li class="submenu">
-                                <a href="javascript:;">Categorías</a>
+                                <a href="javascript:;">Cuenta</a>
                                 <ul>
-                                    <li class="scroll-to-section"><a href="#men">Hombres</a></li>
-                                    <li class="scroll-to-section"><a href="#women">Mujeres</a></li>
-                                    <li class="scroll-to-section"><a href="#kids">Niños</a></li>
-
+                                    <form action="" method="post"> 
+                                    <li><a onclick="cerrarSesion();" href="login.php" >Cerrar Sesión</a></li>
+                                    <li><a href="single-product.php">Cambiar Contraseña</a></li>
+                                    </form>
                                 </ul>
                             </li>
-                            <li class="scroll-to-section"><a href="#explore">Cuenta</a></li>
+                            </li>
                             <li class="scroll-to-section"><a href="#explore">Tipo de Perfil</a></li>
                             <li class="scroll-to-section"><a href="carrito.php">Carrito</a></li>
                         </ul>
@@ -51,6 +51,48 @@ function mostrarHeader()
                 </div>
             </div>
         </div>
+        <script src="usuario.js"></script>
+
+        <!-- jQuery -->
+    <script src="assets/js/jquery-2.1.0.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="assets/js/popper.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+
+<!-- Plugins -->
+<script src="assets/js/owl-carousel.js"></script>
+<script src="assets/js/accordions.js"></script>
+<script src="assets/js/datepicker.js"></script>
+<script src="assets/js/scrollreveal.min.js"></script>
+<script src="assets/js/waypoints.min.js"></script>
+<script src="assets/js/jquery.counterup.min.js"></script>
+<script src="assets/js/imgfix.min.js"></script> 
+<script src="assets/js/slick.js"></script> 
+<script src="assets/js/lightbox.js"></script> 
+<script src="assets/js/isotope.js"></script> 
+
+<!-- Global Init -->
+<script src="assets/js/custom.js"></script>
+
+<script>
+
+    $(function() {
+        var selectedClass = "";
+        $("p").click(function(){
+        selectedClass = $(this).attr("data-rel");
+        $("#portfolio").fadeTo(50, 0.1);
+            $("#portfolio div").not("."+selectedClass).fadeOut();
+        setTimeout(function() {
+          $("."+selectedClass).fadeIn();
+          $("#portfolio").fadeTo(50, 1);
+        }, 500);
+            
+        });
+    });
+
+</script>
+
     </header>
     <!-- ***** Header Area End ***** -->
 <?php
@@ -111,6 +153,47 @@ function mostrarFooter()
                 </div>
             </div>
         </div>
+
+        <!-- jQuery -->
+    <script src="assets/js/jquery-2.1.0.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="assets/js/popper.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+
+<!-- Plugins -->
+<script src="assets/js/owl-carousel.js"></script>
+<script src="assets/js/accordions.js"></script>
+<script src="assets/js/datepicker.js"></script>
+<script src="assets/js/scrollreveal.min.js"></script>
+<script src="assets/js/waypoints.min.js"></script>
+<script src="assets/js/jquery.counterup.min.js"></script>
+<script src="assets/js/imgfix.min.js"></script> 
+<script src="assets/js/slick.js"></script> 
+<script src="assets/js/lightbox.js"></script> 
+<script src="assets/js/isotope.js"></script> 
+
+<!-- Global Init -->
+<script src="assets/js/custom.js"></script>
+
+<script>
+
+    $(function() {
+        var selectedClass = "";
+        $("p").click(function(){
+        selectedClass = $(this).attr("data-rel");
+        $("#portfolio").fadeTo(50, 0.1);
+            $("#portfolio div").not("."+selectedClass).fadeOut();
+        setTimeout(function() {
+          $("."+selectedClass).fadeIn();
+          $("#portfolio").fadeTo(50, 1);
+        }, 500);
+            
+        });
+    });
+
+</script>
+
     </footer>
 
 <?php
