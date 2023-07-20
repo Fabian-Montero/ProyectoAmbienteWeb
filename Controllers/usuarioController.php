@@ -37,7 +37,7 @@
                 header("location: ../Views/cambiarContrasenna.php?q=" . $Correo);
             }else 
             {
-                $_SESSION["NombreUsuario"] = $datos["nombre"];
+                $_SESSION["NombreUsuario"] = $datos["Nombre"];
                 header("location: ../Views/home.php");
             }
 
@@ -78,11 +78,10 @@
             $_POST["MsjPantalla"] = "No se ha podido recuperar su información";
         }
     }
-    function cerrarSesion()
+
+    if(isset($_POST["cerrarSesion"]))
     {
-        echo "Prueba PHP";
         session_destroy();
-        header("location: ../Views/login.php");
     }
     
     if(isset($_POST["btnCambiarContrasenna"]))

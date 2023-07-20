@@ -5,6 +5,12 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 function mostrarHeader()
 {
+
+    if($_SESSION["NombreUsuario"] == null)
+    {
+       header("location: login.php");
+    }
+
 ?>
     <!-- ***** Header Area Start ***** -->
     <header class="header-area header-sticky">
@@ -33,7 +39,7 @@ function mostrarHeader()
                                 <a href="javascript:;">Cuenta</a>
                                 <ul>
                                     <form action="" method="post"> 
-                                    <li><a onclick="cerrarSesion();" href="login.php" >Cerrar Sesión</a></li>
+                                    <li><a onclick="cerrarSesion();">Cerrar Sesión</a></li>
                                     <li><a href="single-product.php">Cambiar Contraseña</a></li>
                                     </form>
                                 </ul>
