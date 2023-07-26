@@ -87,6 +87,8 @@ https://templatemo.com/tm-571-hexashop
         </div>
         <div class="container">
             <div class="row">
+
+            <!-- Inicio Producto -->
                 <div class="col-lg-4">
                     <div class="item">
                         <div class="thumb">
@@ -112,6 +114,8 @@ https://templatemo.com/tm-571-hexashop
                         </div>
                     </div>
                 </div>
+
+                <!-- Final Producto -->
                 <div class="col-lg-4">
                     <div class="item">
                         <div class="thumb">
