@@ -524,7 +524,7 @@ https://templatemo.com/tm-571-hexashop
     mostrarFooter();
     ?>
     
-    <script src="usuario.js"></script>
+    <!-- <script src="usuario.js"></script> -->
     <!-- jQuery -->
     <script src="assets/js/jquery-2.1.0.min.js"></script>
 

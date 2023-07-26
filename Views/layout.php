@@ -58,6 +58,8 @@ function mostrarHeader()
             </div>
         </div>
         <script src="usuario.js"></script>
+        
+
 
         <!-- jQuery -->
     <script src="assets/js/jquery-2.1.0.min.js"></script>
@@ -160,7 +162,7 @@ function mostrarFooter()
             </div>
         </div>
 
-        <!-- jQuery -->
+        jQuery
     <script src="assets/js/jquery-2.1.0.min.js"></script>
 
 <!-- Bootstrap -->
