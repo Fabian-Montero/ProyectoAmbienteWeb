@@ -38,6 +38,9 @@
             }else 
             {
                 $_SESSION["NombreUsuario"] = $datos["Nombre"];
+                $_SESSION["RolUsuario"] = $datos["IdRoles"];
+                $_SESSION["NombreRolUsuario"] = $datos["NombreRol"];
+
                 header("location: ../Views/home.php");
             }
 
