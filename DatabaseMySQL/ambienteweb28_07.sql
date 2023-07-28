@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Jul 26, 2023 at 08:29 AM
+-- Generation Time: Jul 28, 2023 at 10:01 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ambienteweb17/07`
+-- Database: `ambienteweb28_07`
 --
 
 DELIMITER $$
@@ -119,23 +119,6 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `administrador`
---
-
-CREATE TABLE `administrador` (
-  `id` bigint(20) NOT NULL,
-  `identificacion` varchar(255) NOT NULL,
-  `nombre` varchar(255) NOT NULL,
-  `apellido1` varchar(255) NOT NULL,
-  `apellido2` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `contrasenna` varchar(255) NOT NULL,
-  `activo` bit(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `carritos`
 --
 
@@ -198,18 +181,21 @@ CREATE TABLE `clientes` (
   `pais` varchar(255) NOT NULL,
   `contrasenna` varchar(255) NOT NULL,
   `activo` bit(1) NOT NULL,
-  `contrasenna_temporal` bit(1) DEFAULT NULL
+  `contrasenna_temporal` bit(1) DEFAULT NULL,
+  `clientescol` varchar(45) DEFAULT NULL,
+  `IdRoles` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `clientes`
 --
 
-INSERT INTO `clientes` (`id`, `nombre`, `apellido`, `correo`, `direccion`, `ciudad`, `pais`, `contrasenna`, `activo`, `contrasenna_temporal`) VALUES
-(1, 'Michael', 'Arias', 'michaelarias980@gmail.com', 'San jose, Alajuelita', 'San José', 'Costa Rica', 'secreta', b'1', NULL),
-(4, 'kenny', 'cardenas', 'kennycardenas@gmail.com', 'Cartago,Guarco', 'San José', 'Costa Rica', 'secreta', b'1', NULL),
-(5, 'Michael', 'Arias', 'marias80378@ufide.ac.cr', 'Cartago,Guarco', 'San José', 'Costa Rica', '4413', b'1', NULL),
-(12, 'Fabian', 'Montero Madrigal', 'fabianja0477@gmail.com', 'Barrio el Carmen', 'Coronado', 'Costa Rica', 'prohibida', b'1', NULL);
+INSERT INTO `clientes` (`id`, `nombre`, `apellido`, `correo`, `direccion`, `ciudad`, `pais`, `contrasenna`, `activo`, `contrasenna_temporal`, `clientescol`, `IdRoles`) VALUES
+(1, 'Michael', 'Arias', 'michaelarias980@gmail.com', 'San jose, Alajuelita', 'San José', 'Costa Rica', 'secreta', b'1', NULL, NULL, 0),
+(4, 'kenny', 'cardenas', 'kennycardenas@gmail.com', 'Cartago,Guarco', 'San José', 'Costa Rica', 'secreta', b'1', NULL, NULL, 0),
+(5, 'Michael', 'Arias', 'marias80378@ufide.ac.cr', 'Cartago,Guarco', 'San José', 'Costa Rica', '4413', b'1', NULL, NULL, 0),
+(12, 'Fabian', 'Montero Madrigal', 'fabianja0477@gmail.com', 'Barrio el Carmen', 'Coronado', 'Costa Rica', 'ufide', b'1', NULL, NULL, 0),
+(13, 'Josue ', 'Torres', 'josue@gmail.com', 'Buenos aires barrio mulcaz', 'Buenos aires ', 'Argentina ', '12345', b'1', NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -375,40 +361,25 @@ INSERT INTO `productos` (`id`, `nombre`, `precio`, `descripcion`, `cantidad_stoc
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sucursales`
+-- Table structure for table `roles`
 --
 
-CREATE TABLE `sucursales` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(255) NOT NULL,
-  `direccion` varchar(255) NOT NULL,
-  `ciudad` varchar(255) NOT NULL,
-  `pais` varchar(255) NOT NULL
+CREATE TABLE `roles` (
+  `IdRoles` int(11) NOT NULL,
+  `NombreRol` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `vendedores`
+-- Dumping data for table `roles`
 --
 
-CREATE TABLE `vendedores` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(255) NOT NULL,
-  `apellido` varchar(255) NOT NULL,
-  `sucursal_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `roles` (`IdRoles`, `NombreRol`) VALUES
+(1, 'Administrador'),
+(2, 'Cliente');
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `administrador`
---
-ALTER TABLE `administrador`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `idx_administrador_email` (`email`);
 
 --
 -- Indexes for table `carritos`
@@ -459,27 +430,14 @@ ALTER TABLE `productos`
   ADD KEY `categoria_id` (`categoria_id`);
 
 --
--- Indexes for table `sucursales`
+-- Indexes for table `roles`
 --
-ALTER TABLE `sucursales`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `vendedores`
---
-ALTER TABLE `vendedores`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `sucursal_id` (`sucursal_id`);
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`IdRoles`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
-
---
--- AUTO_INCREMENT for table `administrador`
---
-ALTER TABLE `administrador`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `carritos`
@@ -497,7 +455,7 @@ ALTER TABLE `categorias`
 -- AUTO_INCREMENT for table `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `facturas`
@@ -512,16 +470,10 @@ ALTER TABLE `productos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1053;
 
 --
--- AUTO_INCREMENT for table `sucursales`
+-- AUTO_INCREMENT for table `roles`
 --
-ALTER TABLE `sucursales`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `vendedores`
---
-ALTER TABLE `vendedores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `roles`
+  MODIFY `IdRoles` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -558,12 +510,6 @@ ALTER TABLE `facturas`
 --
 ALTER TABLE `productos`
   ADD CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`categoria_id`) REFERENCES `categorias` (`id`);
-
---
--- Constraints for table `vendedores`
---
-ALTER TABLE `vendedores`
-  ADD CONSTRAINT `vendedores_ibfk_1` FOREIGN KEY (`sucursal_id`) REFERENCES `sucursales` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
