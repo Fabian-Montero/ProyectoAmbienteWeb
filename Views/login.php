@@ -39,6 +39,23 @@
 		<div class="container-login100">
 			<div class="wrap-login100">
 				<form class="login100-form validate-form" action="" method="post">
+				<?php
+					if(isset($_SESSION["CorreoEnviado"]))
+					{
+						echo '<div class="alert alert-info text-center" role="alert">' . $_SESSION["CorreoEnviado"] . '</div>';
+						unset($_SESSION['CorreoEnviado']);
+					}
+
+
+
+					if(isset($_SESSION["ErrorLogin"]))
+					{
+						echo '<div class="alert alert-danger" role="alert">' . $_SESSION["ErrorLogin"] . '</div>';
+						unset($_SESSION['ErrorLogin']);
+					}
+
+				?>
+
 					<span class="login100-form-title p-b-43">
 						Iniciar Sesión
 					</span>
@@ -58,15 +75,10 @@
 					</div>
 
 					<div class="flex-sb-m w-full p-t-3 p-b-32">
-						<div class="contact100-form-checkbox">
-							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-							<label class="label-checkbox100" for="ckb1">
-								Recordar contraseña
-							</label>
-						</div>
+						
 
 						<div>
-							<a href="#" class="txt1">
+							<a href="recuperar.php" class="txt1">
 								Olvidaste la contraseña?
 							</a>
 						</div>

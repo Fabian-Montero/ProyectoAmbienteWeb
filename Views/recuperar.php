@@ -41,11 +41,18 @@ include_once '../Controllers/usuarioController.php';
 
            
 				<form class="login100-form validate-form" action="" method="post">
+				<?php
+                    if(isset($_SESSION["CorreoNoEnviado"]))
+                    {
+                      echo '<div class="alert alert-danger" role="alert">' . $_SESSION["CorreoNoEnviado"] . '</div>';
+					  unset($_SESSION['CorreoNoEnviado']);
+                    }
+                    ?>
 					<span class="login100-form-title p-b-43">
 						Recuperar Cuenta
 					</span>
 					
-					<!-- falta modificar los names e inputs -->
+					
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
 						<input class="input100" id="txtCorreo" name="txtCorreo" type="email">
 						<span class="focus-input100"></span>
@@ -53,18 +60,17 @@ include_once '../Controllers/usuarioController.php';
 					</div>
 					
 
+					
+					
 					<div class="container-login100-form-btn">
 						<button id="btnRecuperar" name="btnRecuperar" type="submit" class="login100-form-btn">
 							Recuperar Cuenta
 						</button>
 					</div>
 					
-                    <?php
-                    if(isset($_POST["MsjPantalla"]))
-                    {
-                      echo '<div style="text-align:center" class="alert alert-light" role="alert">' . $_POST["MsjPantalla"] . '</div>';
-                    }
-                    ?>
+                    
+					
+				
 
 				</form>
 

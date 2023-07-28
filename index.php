@@ -1,4 +1,4 @@
 <?php
-header("location: Views/registro.php");
+header("location: Views/login.php");
 
 ?>

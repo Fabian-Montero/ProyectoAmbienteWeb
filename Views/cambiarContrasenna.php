@@ -40,7 +40,7 @@ include_once '../Controllers/usuarioController.php';
 			<div class="wrap-login100">
 
            
-				<form class="login100-form validate-form" action="" method="post">
+				<form id = "formConfirmarContrasenna" class="login100-form validate-form" action="" method="post">
 					<span class="login100-form-title p-b-43">
 						Recuperar Cuenta
 					</span>
@@ -50,22 +50,23 @@ include_once '../Controllers/usuarioController.php';
 					<?php 
    				 		echo '<input type="hidden" name="txtCorreo" id="txtCorreo" value="' . $_GET["q"] . '">';
 					?>
-					<!-- falta modificar los names e inputs -->
-					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<input class="input100" id="txtContrasenna" name="txtContrasenna" type="password">
+					
+					<div class="wrap-input100">
+						<input class="input100" id="txtContrasenna" name="txtContrasenna" type="password" onblur="ValidarClaves();">
 						<span class="focus-input100"></span>
 						<span class="label-input100">Contraseña</span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<input class="input100" id="txtConfirmarContrasenna" name="txtConfirmarContrasenna" type="password">
+					<div class="wrap-input100">
+						<input class="input100" id="txtConfirmarContrasenna" name="txtConfirmarContrasenna" type="password" onblur="ValidarClaves();">
 						<span class="focus-input100"></span>
 						<span class="label-input100">Confirmar Contraseña</span>
 					</div>
+
 					
 
 					<div class="container-login100-form-btn">
-						<button id="btnCambiarContrasenna" name="btnCambiarContrasenna" type="submit" class="login100-form-btn">
+						<button id="btnCambiarContrasenna" name="btnCambiarContrasenna" type="submit" class="login100-form-btn" >
 							Cambiar Contraseña
 						</button>
 					</div>
@@ -84,11 +85,7 @@ include_once '../Controllers/usuarioController.php';
 			</div>
 		</div>
 	</div>
-	
-	
 
-	
-	
 <!--===============================================================================================-->
 	<script src="login/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
@@ -105,6 +102,8 @@ include_once '../Controllers/usuarioController.php';
 	<script src="login/vendor/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
 	<script src="login/js/main.js"></script>
+
+	<script src="usuario.js"></script>
 
 </body>
 </html>

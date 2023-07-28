@@ -25,7 +25,7 @@ function mostrarHeader()
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li class="scroll-to-section"><a href="#top" class="active">Inicio</a></li>
+                            <li class="scroll-to-section"><a href="home.php">Inicio</a></li>
                             <li class="submenu">
                                 <a href="javascript:;">Páginas</a>
                                 <ul>
@@ -39,7 +39,7 @@ function mostrarHeader()
                                 <a href="javascript:;">Cuenta</a>
                                 <ul>
                                     <form action="" method="post"> 
-                                    <li><a onclick="cerrarSesion();">Cerrar Sesión</a></li>
+                                    <li><a href="#"onclick="cerrarSesion();">Cerrar Sesión</a></li>
                                     <li><a href="single-product.php">Cambiar Contraseña</a></li>
                                     </form>
                                 </ul>
@@ -58,11 +58,12 @@ function mostrarHeader()
             </div>
         </div>
         <script src="usuario.js"></script>
+
+
         
 
-
-        <!-- jQuery -->
-    <script src="assets/js/jquery-2.1.0.min.js"></script>
+<!-- jQuery -->
+<script src="assets/js/jquery-2.1.0.min.js"></script>
 
 <!-- Bootstrap -->
 <script src="assets/js/popper.js"></script>

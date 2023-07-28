@@ -26,6 +26,12 @@
     <link rel="stylesheet" href="assets/css/owl-carousel.css">
 
     <link rel="stylesheet" href="assets/css/lightbox.css">
+
+    
+
+  
+
+    
 <!--
 
 TemplateMo 571 Hexashop
@@ -55,6 +61,8 @@ https://templatemo.com/tm-571-hexashop
 
     ?>
 
+
+
     <!-- ***** Main Banner Area Start ***** -->
     <div class="main-banner" id="top">
         <div class="container-fluid">
@@ -66,7 +74,7 @@ https://templatemo.com/tm-571-hexashop
                                 <h4>Somos Hexashop</h4>
                                 <span>La tienda en la que encontrará sus productos favoritos</span>
                                 <div class="main-border-button">
-                                    <a href="#">Compra Ahora!</a>
+                                    <a href="products.php">Compra Ahora!</a>
                                 </div>
                             </div>
                             <img src="assets/images/left-banner-image.jpg" alt="">

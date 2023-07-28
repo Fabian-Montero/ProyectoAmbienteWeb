@@ -26,7 +26,7 @@
         $Correo = $_POST["txtCorreo"];
         $Contrasenna = $_POST["txtContrasenna"];
     
-              $respuesta = ValidarSesion($Correo, $Contrasenna);
+        $respuesta = ValidarSesion($Correo, $Contrasenna);
 
         if($respuesta -> num_rows > 0)
         {
@@ -48,7 +48,7 @@
         }
         else
         {
-            $_POST["MsjPantalla"] = "No se ha podido validar su información";
+            $_SESSION["ErrorLogin"] = "No se ha podido validar su información, intente nuevamente";
       
         } 
         
@@ -66,19 +66,20 @@
             $codigoSeguridad = randomPassword();
 
             $mensaje = "<html><body>
-                        Estimado(a)" . $datos["Nombre"] . "<br/>
+                        Estimado(a) " . $datos["Nombre"] . "<br/>
                         Se ha generado la siguiente clave temporal: <b>" . $codigoSeguridad . "</b><br/>
                         Recuerde iniciar sesión con esta contraseña para realizar el debido cambio<br/><br/>
                         Muchas gracias.
                         </body></html>";
 
             EnviarCorreo($Correo, 'Recuperar Contraseña', $mensaje);
+            $_SESSION["CorreoEnviado"] = "Por favor verificar su correo electrónico";
             ActualizarCodigo($datos["id"], $codigoSeguridad);
             header("location: ../Views/login.php");
         }
         else
         {
-            $_POST["MsjPantalla"] = "No se ha podido recuperar su información";
+            $_SESSION["CorreoNoEnviado"] = "No se ha podido recuperar su información";
         }
     }
 
@@ -99,6 +100,9 @@
             $datos = mysqli_fetch_array($respuesta);
             
             ActualizarContrasenna($datos["id"], $contrasenna);
+            $_SESSION["NombreUsuario"] = $datos["Nombre"];
+            $_SESSION["RolUsuario"] = $datos["IdRoles"];
+            $_SESSION["NombreRolUsuario"] = $datos["NombreRol"];
             header("location: ../Views/home.php");
         }
         else
