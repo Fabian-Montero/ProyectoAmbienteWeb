@@ -17,7 +17,7 @@ function cargarProductos(){
         <div class="thumb">
             <div class="hover-content">
                 <ul>
-                    <li><a href="single-product.html"><i class="fa fa-eye"></i></a></li>
+                    <li><a href="product.php?q=' . $producto["id"] . '"><i class="fa fa-eye"></i></a></li>
                     <li><a href="single-product.html"><i class="fa fa-star"></i></a></li>
                     <li><a href="single-product.html"><i class="fa fa-shopping-cart"></i></a></li>
                 </ul>
@@ -41,6 +41,65 @@ function cargarProductos(){
 '; }
     }   
 }
+
+
+function cargarProducto($id){
+
+    $respuesta = cargarProductoM($id);
+    if ($respuesta -> num_rows > 0)
+    {
+        $producto = mysqli_fetch_array($respuesta);
+        echo
+        '
+        <section class="section" id="product">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8">
+                    <div class="left-images">
+                        <img width="350" height="368" src="' . $producto["url_imagen"] .'" alt="">
+                
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="right-content">
+                        <h4>' . $producto["nombre"] .' </h4>
+                        <span class="price">$' . $producto["precio"] .'</span>
+                        <br>
+                        <ul style= "margin-top:33px ; margin-right:60px"  class="stars">
+                            <li><i class="fa fa-star"></i></li>
+                            <li><i class="fa fa-star"></i></li>
+                            <li><i class="fa fa-star"></i></li>
+                            <li><i class="fa fa-star"></i></li>
+                            <li><i class="fa fa-star"></i></li>
+                        </ul>
+                        <span>' . $producto["descripcion"].'</span>
+                        <div>
+                            <p>Stock: ' . $producto["cantidad_stock"].'</p>
+                        </div>
+                        <div class="quantity-content">
+                            <div class="left-content">
+                                <h6>Cantidad</h6>
+                            </div>
+                            <div class="right-content">
+                                <div class="quantity buttons_added">
+                                    <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="total">
+                            <h4>Total: $' . $producto["precio"] .'</h4>
+                            <div class="main-border-button"><a href="#">Añadir al carrito</a></div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </section>
+        ';
+    }
+}
+
+
 
     
     

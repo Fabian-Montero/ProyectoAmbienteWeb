@@ -9,6 +9,14 @@
         CloseBD($enlace);
         return $respuesta;
     }    
+
+    function cargarProductoM($id){
+        $enlace = OpenBD();
+        $sentencia = "CALL cargarProductoM('$id')";
+        $respuesta = $enlace -> query($sentencia);
+        CloseBD($enlace);
+        return $respuesta;
+    }
     
     
     

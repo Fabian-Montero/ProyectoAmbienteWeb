@@ -31,7 +31,6 @@ function mostrarHeader()
                                 <ul>
                                     <li><a href="about.php">Sobre Nosotros</a></li>
                                     <li><a href="products.php">Productos</a></li>
-                                    <li><a href="single-product.php">Producto</a></li>
 
                                 </ul>
                             </li>
