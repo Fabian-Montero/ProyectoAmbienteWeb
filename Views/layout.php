@@ -31,6 +31,7 @@ function mostrarHeader()
                                 <ul>
                                     <li><a href="about.php">Sobre Nosotros</a></li>
                                     <li><a href="products.php">Productos</a></li>
+                                    <li><a href="categories.php">Categorías</a></li>
 
                                 </ul>
                             </li>
@@ -131,26 +132,26 @@ function mostrarFooter()
                 <div class="col-lg-3">
                     <h4>Categorías</h4>
                     <ul>
-                        <li><a href="#">Hombres</a></li>
-                        <li><a href="#">Mujeres</a></li>
-                        <li><a href="#">Niños</a></li>
+                        <li><a href="#">Muebles</a></li>
+                        <li><a href="#">Vestidos de Mujer</a></li>
+                        <li><a href="#">Zapatos de Hombre</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-3">
                     <h4>Links Útiles</h4>
                     <ul>
-                        <li><a href="#">Inicio</a></li>
-                        <li><a href="#">Sobre Nosotros</a></li>
-                        <li><a href="#">Prodcutos</a></li>
+                        <li><a href="home.php">Inicio</a></li>
+                        <li><a href="about.php">Sobre Nosotros</a></li>
+                        <li><a href="products.php">Productos</a></li>
 
                     </ul>
                 </div>
                 <div class="col-lg-3">
                     <h4>Ayuda e Información</h4>
                     <ul>
-                        <li><a href="#">Cuenta</a></li>
+                        <li><a href="#"onclick="cerrarSesion();">Cerrar Sesión</a></li>
                         <li><a href="#">Cambiar contraseña</a></li>
-                        <li><a href="#">Carrito</a></li>
+                        <li><a href="carrito.php">Carrito</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-12">

@@ -12,11 +12,20 @@
 
     function cargarProductoM($id){
         $enlace = OpenBD();
-        $sentencia = "CALL cargarProductoM('$id')";
+        $sentencia = "CALL cargarProducto('$id')";
         $respuesta = $enlace -> query($sentencia);
         CloseBD($enlace);
         return $respuesta;
     }
+
+    function cargarCategoriasM()
+    {
+        $enlace = OpenBD();
+        $sentencia = "CALL cargarCategorias()";
+        $respuesta = $enlace -> query($sentencia);
+        CloseBD($enlace);
+        return $respuesta;
+    } 
     
     
     

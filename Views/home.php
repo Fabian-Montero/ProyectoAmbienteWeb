@@ -88,19 +88,19 @@ https://templatemo.com/tm-571-hexashop
                                 <div class="right-first-image">
                                     <div class="thumb">
                                         <div class="inner-content">
-                                            <h4>Mujeres</h4>
-                                            <span>Ropa y accesorios para mujer</span>
+                                            <h4 style= "text-shadow: 6px 6px 10px rgba(0, 0, 0, 10)">Muebles</h4>
+                                            
                                         </div>
                                         <div class="hover-content">
                                             <div class="inner">
-                                                <h4>Mujeres</h4>
-                                                <p>Aquí encontrará todo en ropa de mujer, para todos los gustos</p>
+                                                <h4>Muebles</h4>
+                                                <p>Lo necesario en muebles para su hogar</p>
                                                 <div class="main-border-button">
                                                     <a href="#">Ver más</a>
                                                 </div>
                                             </div>
                                         </div>
-                                        <img src="assets/images/baner-right-image-01.jpg">
+                                        <img width="400" height="380"src="assets/images/cat7.jpg">
                                     </div>
                                 </div>
                             </div>
@@ -108,19 +108,19 @@ https://templatemo.com/tm-571-hexashop
                                 <div class="right-first-image">
                                     <div class="thumb">
                                         <div class="inner-content">
-                                            <h4>Hombres</h4>
-                                            <span>Ropa y accesorios para Hombre</span>
+                                            <h4 style= "text-shadow: 6px 6px 10px rgba(0, 0, 0, 10)">Vestidos de Mujer</h4>
+                                            
                                         </div>
                                         <div class="hover-content">
                                             <div class="inner">
-                                                <h4>Hombres</h4>
-                                                <p>Aquí encontrará todo en ropa de mujer, para todos los gustos</p>
+                                                <h4>Vestidos de Mujer</h4>
+                                                <p>Variedad en vestidos para mujer</p>
                                                 <div class="main-border-button">
                                                     <a href="#">Ver más</a>
                                                 </div>
                                             </div>
                                         </div>
-                                        <img src="assets/images/baner-right-image-02.jpg">
+                                        <img width="400" height="380"src="assets/images/cat9.jpeg">
                                     </div>
                                 </div>
                             </div>
@@ -128,19 +128,19 @@ https://templatemo.com/tm-571-hexashop
                                 <div class="right-first-image">
                                     <div class="thumb">
                                         <div class="inner-content">
-                                            <h4>Niños</h4>
-                                            <span>Ropa y juguetes para niños</span>
+                                            <h4 style= "text-shadow: 6px 6px 10px rgba(0, 0, 0, 10)">Zapatos de Hombre</h4>
+                                            
                                         </div>
                                         <div class="hover-content">
                                             <div class="inner">
-                                                <h4>Kids</h4>
-                                                <p>Aquí encontrará los juguetes y ropa necesaria para los niños de la casa</p>
+                                                <h4 >Zapatos de Hombre</h4>
+                                                <p>Variedad en zapatos para hombre</p>
                                                 <div class="main-border-button">
                                                     <a href="#">Ver más</a>
                                                 </div>
                                             </div>
                                         </div>
-                                        <img src="assets/images/baner-right-image-03.jpg">
+                                        <img width="400" height="380"src="assets/images/cat12.jpg">
                                     </div>
                                 </div>
                             </div>
@@ -148,19 +148,19 @@ https://templatemo.com/tm-571-hexashop
                                 <div class="right-first-image">
                                     <div class="thumb">
                                         <div class="inner-content">
-                                            <h4>Accesorios</h4>
-                                            <span>Los mejores accesorios</span>
+                                            <h4 style= "text-shadow: 6px 6px 10px rgba(0, 0, 0, 10)">Otras Categorías</h4>
+                                            
                                         </div>
                                         <div class="hover-content">
                                             <div class="inner">
-                                                <h4>Accesorios</h4>
-                                                <p>Aquí encontrará los últimos accesorios tanto para hombre como mujer</p>
+                                                <h4>Otras Categorías</h4>
+                                                <p>Explore muchas más categorías</p>
                                                 <div class="main-border-button">
-                                                    <a href="#">Ver más</a>
+                                                    <a href="categories.php">Ver más</a>
                                                 </div>
                                             </div>
                                         </div>
-                                        <img src="assets/images/baner-right-image-04.jpg">
+                                        <img width="400" height="380"src="assets/images/baner-right-image-04.jpg">
                                     </div>
                                 </div>
                             </div>

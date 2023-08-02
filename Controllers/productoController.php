@@ -99,10 +99,44 @@ function cargarProducto($id){
     }
 }
 
+function cargarCategorias()
+{
+    $respuesta = cargarCategoriasM();
 
+    if ($respuesta-> num_rows > 0)
+    {
+        while($categoria = mysqli_fetch_array($respuesta))
+        {
+            echo 
+            '
+            <div class="col-lg-3">
+                <div class="right-first-image">
+                    <div class="thumb">
+                        <div class="inner-content">
+                            <h4 style= "text-shadow: 6px 6px 10px rgba(0, 0, 0, 10)" >'. $categoria["nombre"] . '</h4>
+                        </div>
+                        <div class="hover-content">
+                            <div class="inner">
+                                <h4>'. $categoria["nombre"] . '</h4>
+                                <p>'. $categoria["descripcion"] . '</p>
+                                <div class="main-border-button">
+                                    <a href="#">Ver más</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="image-with-text">
+                            <img width="230" height="200" src="'. $categoria["url_imagen"] . '">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            ';
+        }
+    }
+}
 
     
     
     
 
-    ?>
+?>
