@@ -1,6 +1,8 @@
 <?php
     include_once "layout.php";
     include_once "../Controllers/productoController.php";
+
+    $id = $_GET["q"];
 ?>
 
 
@@ -92,7 +94,7 @@ https://templatemo.com/tm-571-hexashop
 
         <form action="" method="post">
             <div class="search-container">
-                <input type="text" id="search-input" name="search-input" placeholder="Search...">
+                <input type="text" id="search-input" name="search-input"placeholder="Search...">
                 <button id="search-button" name="search-button" type="submit">Search</button>
             </div>
             <br>
@@ -100,8 +102,8 @@ https://templatemo.com/tm-571-hexashop
             
         
             <div class="row">
-            
-            <?php cargarProductos(); ?>
+
+            <?php cargarProductoInd($id); ?>
 
                 <div class="col-lg-12">
                     <div class="pagination">

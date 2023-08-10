@@ -26,6 +26,14 @@
         CloseBD($enlace);
         return $respuesta;
     } 
+
+    function cargarProductoName($name){
+        $enlace = OpenBD();
+        $sentencia = "CALL cargarProductoName('$name')";
+        $respuesta = $enlace -> query($sentencia);
+        CloseBD($enlace);
+        return $respuesta;
+    }
     
     
     
