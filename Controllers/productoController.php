@@ -135,7 +135,57 @@ function cargarCategorias()
     }
 }
 
+if(isset($_POST["search-button"]))
+    {
+        $nombre = $_POST["search-input"];
+        $return = cargarProductoName($nombre);
+    if ($return -> num_rows > 0)
+    {
+        $producto = mysqli_fetch_array($return);
+        $id = $producto["id"];
+        header("location: ../Views/products_individual.php?q=" . $id);
+    }
+        
+    }
     
+    function cargarProductoInd($id){
+
+        $respuesta = cargarProductoM($id);
+        if ($respuesta -> num_rows > 0)
+        {
+            $producto = mysqli_fetch_array($respuesta);
+            echo
+            '
+    
+            <div class="col-lg-4">
+            <div class="item">
+                <div class="thumb">
+                    <div class="hover-content">
+                        <ul>
+                            <li><a href="product.php?q=' . $producto["id"] . '"><i class="fa fa-eye"></i></a></li>
+                            <li><a href="single-product.html"><i class="fa fa-star"></i></a></li>
+                            <li><a href="single-product.html"><i class="fa fa-shopping-cart"></i></a></li>
+                        </ul>
+                    </div>
+                    <img width="350" height="368" src="' . $producto["url_imagen"] . ' " alt="">
+                </div>
+                <div class="down-content">
+                    <h4>' . $producto["nombre"] . '</h4>
+                    <span>$' . $producto["precio"] . '</span>
+                    <ul style= "margin-top:35px" class="stars">
+                        <li><i class="fa fa-star"></i></li>
+                        <li><i class="fa fa-star"></i></li>
+                        <li><i class="fa fa-star"></i></li>
+                        <li><i class="fa fa-star"></i></li>
+                        <li><i class="fa fa-star"></i></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        ';
+        }
+    }
     
     
 
