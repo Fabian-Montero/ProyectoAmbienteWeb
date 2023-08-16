@@ -25,6 +25,7 @@ function mostrarHeader()
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
+                            
                             <li class="scroll-to-section"><a href="home.php">Inicio</a></li>
                             <li class="submenu">
                                 <a href="javascript:;">Páginas</a>
@@ -45,8 +46,8 @@ function mostrarHeader()
                                 </ul>
                             </li>
                             </li>
-                            <li class="scroll-to-section"><a href="#explore">Tipo de Perfil</a></li>
-                            <li class="scroll-to-section"><a href="carrito.php">Carrito</a></li>
+                            <li class="scroll-to-section"><a href="carrito.php"> <i class="fa fa-cart-plus fa-lg"></i> </a></li>
+                            <li style= "margin-left: 60px ; pointer-events: none;"class="scroll-to-section"><a href="#"><?php echo $_SESSION["NombreUsuario"] . " " .  $_SESSION["ApellidoUsuario"] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_SESSION["NombreRolUsuario"];?></a></li>
                         </ul>
 
                         <a class='menu-trigger'>

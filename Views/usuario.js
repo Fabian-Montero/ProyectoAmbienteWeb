@@ -45,4 +45,9 @@ function ValidarClaves() {
       $('#errorContrasenna').remove();
     }
   }
+
+}
+
+function agregarCarrito(){
+  alert("fasfa");
 }

@@ -16,10 +16,20 @@ function cargarProductos(){
     <div class="item">
         <div class="thumb">
             <div class="hover-content">
+            <form role="form" class="text-start action="" method="post">
                 <ul>
-                    <li><a href="product.php?q=' . $producto["id"] . '"><i class="fa fa-eye"></i></a></li>
-                    <li><a href="single-product.html"><i class="fa fa-star"></i></a></li>
-                    <li><a href="single-product.html"><i class="fa fa-shopping-cart"></i></a></li>
+                    <input type="hidden" id="txtId" name="txtId" value="'. $producto["id"] .'">
+                    <input type="hidden" id="txtPrecio" name="txtPrecio" value="'. $producto["precio"] .'">
+                    <input type="hidden" id="txtCantidad" name="txtCantidad" value="1">
+                    <li><a href="product.php?q=' . $producto["id"] . '"><i  class="fa fa-eye"></i></a></li>
+                    
+                    <li><button style= "width: 50px;
+                    height: 50px;
+                    text-align: center;
+                    line-height: 50px;
+                    display: inline-block;
+                    color: #2a2a2a;
+                    background-color: #fff;"type="submit" value=""id="btnAgregar" name="btnAgregar"> <i class="fa fa-shopping-cart"></i> </button></li>
                 </ul>
             </div>
             <img width="350" height="368" src="' . $producto["url_imagen"] . ' " alt="">
@@ -34,6 +44,7 @@ function cargarProductos(){
                 <li><i class="fa fa-star"></i></li>
                 <li><i class="fa fa-star"></i></li>
             </ul>
+            </form>
         </div>
     </div>
 </div>
@@ -185,6 +196,19 @@ if(isset($_POST["search-button"]))
 
         ';
         }
+    }
+
+    if(isset($_POST["btnAgregar"]))
+    {
+        $idProducto = $_POST["txtId"];
+        $nombreCliente = $_SESSION["NombreUsuario"];
+        $precioProducto = $_POST["txtPrecio"];
+        $cantidad = $_POST["txtCantidad"];
+        
+        echo $idProducto . $nombreCliente . $precioProducto . $cantidad;
+        // RegistrarUsuario($Correo, $Nombre, $Apellidos, $Pais, $Ciudad, $Direccón, $Contrasenna);
+        // header("location: ../Views/login.php");
+        
     }
     
     

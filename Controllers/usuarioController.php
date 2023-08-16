@@ -38,8 +38,15 @@
             }else 
             {
                 $_SESSION["NombreUsuario"] = $datos["Nombre"];
+                $_SESSION["ApellidoUsuario"] = $datos["apellido"];
+                $_SESSION["IdUsuario"] = $datos["id"];
                 $_SESSION["RolUsuario"] = $datos["IdRoles"];
-                $_SESSION["NombreRolUsuario"] = $datos["NombreRol"];
+                if ($_SESSION["RolUsuario" == 1]){
+                    $_SESSION["NombreRolUsuario"] = "Administrador";
+                }else{
+                    $_SESSION["NombreRolUsuario"] = "Cliente";
+                }
+                
 
                 header("location: ../Views/home.php");
             }
@@ -101,6 +108,8 @@
             
             ActualizarContrasenna($datos["id"], $contrasenna);
             $_SESSION["NombreUsuario"] = $datos["Nombre"];
+            $_SESSION["ApellidoUsuario"] = $datos["apellido"];
+            $_SESSION["IdUsuario"] = $datos["id"];
             $_SESSION["RolUsuario"] = $datos["IdRoles"];
             $_SESSION["NombreRolUsuario"] = $datos["NombreRol"];
             header("location: ../Views/home.php");
