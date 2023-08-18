@@ -1,11 +1,16 @@
 <?php
 
+include_once '../Controllers/usuarioController.php';
+include_once '../Controllers/productoController.php';
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
+
+    
 }
 function mostrarHeader()
 {
-
+    consultarResumenCarrito();
     if($_SESSION["NombreUsuario"] == null)
     {
        header("location: login.php");
@@ -46,9 +51,13 @@ function mostrarHeader()
                                 </ul>
                             </li>
                             </li>
-                            <li class="scroll-to-section"><a href="carrito.php"> <i class="fa fa-cart-plus fa-lg"></i> </a></li>
-                            <li style= "margin-left: 60px ; pointer-events: none;"class="scroll-to-section"><a href="#"><?php echo $_SESSION["NombreUsuario"] . " " .  $_SESSION["ApellidoUsuario"] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_SESSION["NombreRolUsuario"];?></a></li>
+                            <?php if ($_SESSION["cantidadCarrito"] > 0) {?>
+                            <li style= "margin-right: 0px;"><a href="carrito.php"> <i class="fa fa-cart-plus fa-lg"> <?php echo $_SESSION["cantidadCarrito"] . '&nbsp;&nbsp;$' . $_SESSION["totalCarrito"];?> </i></a></li>
+                            <?php }?>
+                            <li style= "margin-left: 60px ; pointer-events: none;"><a href="#"><?php echo $_SESSION["NombreUsuario"] . " " .  $_SESSION["ApellidoUsuario"] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_SESSION["NombreRolUsuario"];?></a></li>
                         </ul>
+
+                        
 
                         <a class='menu-trigger'>
                             <span>Menu</span>

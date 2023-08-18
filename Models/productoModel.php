@@ -34,6 +34,43 @@
         CloseBD($enlace);
         return $respuesta;
     }
+
+    function agregarCarritoM($idProducto, $idUsuario, $cantidad, $total){
+        $enlace = OpenBD();
+        $sentencia = "CALL agregarCarrito('$idProducto', '$idUsuario', '$cantidad', '$total')";
+        $enlace -> query($sentencia);
+        CloseBD($enlace);
+    }
+
+    function eliminarProductoCarritoM($idProducto){
+        $enlace = OpenBD();
+        $sentencia = "CALL eliminarProductoCarrito('$idProducto')";
+        $enlace -> query($sentencia);
+        CloseBD($enlace);
+    }
+
+    function pagarCarritoM($idUsuario){
+        $enlace = OpenBD();
+        $sentencia = "CALL pagarCarrito('$idUsuario')";
+        $enlace -> query($sentencia);
+        CloseBD($enlace);
+    }
+
+    function consultarResumenCarritoM($idUsuario){
+        $enlace = OpenBD();
+        $sentencia = "CALL consultarResumenCarrito('$idUsuario')";
+        $respuesta = $enlace -> query($sentencia);
+        CloseBD($enlace);
+        return $respuesta;
+    }
+
+    function consultarDetalleCarritoM($idUsuario){
+        $enlace = OpenBD();
+        $sentencia = "CALL consultarDetalleCarrito('$idUsuario')";
+        $respuesta = $enlace -> query($sentencia);
+        CloseBD($enlace);
+        return $respuesta;
+    }
     
     
     

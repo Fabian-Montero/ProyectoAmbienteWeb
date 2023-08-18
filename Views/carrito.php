@@ -75,9 +75,9 @@ https://templatemo.com/tm-571-hexashop
     </div>
     <!-- ***** Main Banner Area End ***** -->
 
-    <!-- ***** About Area Starts ***** -->
+    
     <div class="about-us">
-        <div class="container">
+        <div class=" scrollCarrito container">
             
         
         <!-- Contenido de carrito -->
@@ -91,105 +91,20 @@ https://templatemo.com/tm-571-hexashop
                                     <div class="row g-0">
                                         <div class="col-lg-8">
                                             <div class="p-5">
-                                                <div class="d-flex justify-content-between align-items-center mb-5">
+                                                <div class="  d-flex justify-content-between align-items-center mb-5">
                                                     <h1 class="fw-bold mb-0 text-black">Carrito</h1>
-                                                    <h6 class="mb-0 text-muted">3 items</h6>
+                                                    <h6 class="mb-0 text-muted"> <?php echo $_SESSION["cantidadCarrito"];?> items</h6>
                                                 </div>
                                                 <hr class="my-4">
 
                                                 <!-- Inicio producto carrito -->
+                                                <?php
+                                                consultarDetalleCarrito();
+                                                ?>
 
-                                                <div class="row mb-4 d-flex justify-content-between align-items-center">
-                                                    <div class="col-md-2 col-lg-2 col-xl-2">
-                                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img5.webp"
-                                                            class="img-fluid rounded-3" alt="Cotton T-shirt">
-                                                    </div>
-                                                    <div class="col-md-3 col-lg-3 col-xl-3">
-                                                        <h6 class="text-muted">Camisa</h6>
-                                                        <h6 class="text-black mb-0">Cotton T-shirt</h6>
-                                                    </div>
-                                                    <div>
-                                                        <input type="number" id="tentacles" value="1" name="tentacles" min="1" max="100" />
-                                                    </div>
-                                                    <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                                                        <h6 class="mb-0">€ 44.00</h6>
-                                                    </div>
-                                                </div>
+                                                <!-- Final producto carrito  -->
 
-                                                <hr class="my-4">
-
-                                                <!-- Final producto carrito -->
-
-                                                <!-- <div class="row mb-4 d-flex justify-content-between align-items-center">
-                                                    <div class="col-md-2 col-lg-2 col-xl-2">
-                                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img6.webp"
-                                                            class="img-fluid rounded-3" alt="Cotton T-shirt">
-                                                    </div>
-                                                    <div class="col-md-3 col-lg-3 col-xl-3">
-                                                        <h6 class="text-muted">Camisa</h6>
-                                                        <h6 class="text-black mb-0">Cotton T-shirt</h6>
-                                                    </div>
-                                                    <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                                                        <button class="btn btn-link px-2"
-                                                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                                            <i class="fas fa-minus"></i>
-                                                        </button>
-
-                                                        <input id="form1" min="0" name="quantity" value="1"
-                                                            type="number" class="form-control form-control-sm" />
-
-                                                        <button class="btn btn-link px-2"
-                                                            onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                                            <i class="fas fa-plus"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                                                        <h6 class="mb-0">€ 44.00</h6>
-                                                    </div>
-                                                    <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                                                        <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
-                                                    </div>
-                                                </div> -->
-
-                                                <!-- <hr class="my-4">
-
-                                                <div class="row mb-4 d-flex justify-content-between align-items-center">
-                                                    <div class="col-md-2 col-lg-2 col-xl-2">
-                                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img7.webp"
-                                                            class="img-fluid rounded-3" alt="Cotton T-shirt">
-                                                    </div>
-                                                    <div class="col-md-3 col-lg-3 col-xl-3">
-                                                        <h6 class="text-muted">Camisa</h6>
-                                                        <h6 class="text-black mb-0">Cotton T-shirt</h6>
-                                                    </div>
-                                                    <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                                                        <button class="btn btn-link px-2"
-                                                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                                            <i class="fas fa-minus"></i>
-                                                        </button>
-
-                                                        <input id="form1" min="0" name="quantity" value="1"
-                                                            type="number" class="form-control form-control-sm" />
-
-                                                        <button class="btn btn-link px-2"
-                                                            onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                                            <i class="fas fa-plus"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                                                        <h6 class="mb-0">€ 44.00</h6>
-                                                    </div>
-                                                    <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                                                        <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
-                                                    </div>
-                                                </div> -->
-
-                                                <hr class="my-4">
-
-                                                <div class="pt-5">
-                                                    <h6 class="mb-0"><a href="#!" class="text-body"><i
-                                                                class="fas fa-long-arrow-alt-left me-2"></i>Volver a comprar</a></h6>
-                                                </div>
+                                                
                                             </div>
                                         </div>
                                         <div class="col-lg-4 bg-grey">
@@ -198,25 +113,24 @@ https://templatemo.com/tm-571-hexashop
                                                 <hr class="my-4">
 
                                                 <div class="d-flex justify-content-between mb-4">
-                                                    <h5 class="text-uppercase">items 3</h5>
-                                                    <h5>€ 132.00</h5>
+                                                    <h5 class="text-uppercase">items <?php echo $_SESSION["cantidadCarrito"];?></h5>
+            
                                                 </div>
-
-                                                
-
-                                                
-
-                                               
-
                                                 <hr class="my-4">
 
                                                 <div class="d-flex justify-content-between mb-5">
-                                                    <h5 class="text-uppercase">Precio Total</h5>
-                                                    <h5>$ 137.00</h5>
+                                                    <h5 style="font-size: 19px"class="text-uppercase">Precio Total</h5>
+                                                    <h5> &nbsp;$ <?php echo $_SESSION["totalCarrito"];?></h5>
                                                 </div>
-
-                                                <button type="button" class="btn btn-dark btn-block btn-lg"
+                                                <form role="form" class="text-start action="" method="post">
+                                                <button type="submit" name="btnPagar" id ="btnPagar" class="btn btn-dark btn-block btn-lg"
                                                     data-mdb-ripple-color="dark">Pagar</button>
+                                                </form>    
+
+                                                    <div class="pt-5">
+                                                    <h6 class="mb-0"><a href="products.php" class="text-body"><i
+                                                                class="fas fa-long-arrow-alt-left me-2"></i>Volver a comprar</a></h6>
+                                                </div>
 
                                             </div>
                                         </div>
