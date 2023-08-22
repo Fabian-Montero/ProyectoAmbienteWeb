@@ -73,4 +73,31 @@
         CloseBD($enlace);
     } 
 
+    function cargarUsuarios()
+    {
+        $enlace = OpenBD();
+        $sentencia = "CALL cargarUsuarios()";
+        $respuesta = $enlace -> query($sentencia);
+        CloseBD($enlace);
+        return $respuesta;
+    }   
+
+    function ActualizarUsuario($id, $Nombre, $Apellidos)
+    {
+        try
+        {
+            $enlace = OpenBD();
+            $sentecia = "CALL ActualizarUsuario('$id','$Nombre','$Apellidos')";
+            $respuesta = $enlace->query($sentecia);
+            CloseBD($enlace);
+    
+
+            return $respuesta;
+        }
+        catch(Exception $e)
+        {
+            return false;
+        }
+    }
+
 ?>

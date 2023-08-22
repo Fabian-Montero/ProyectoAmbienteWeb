@@ -21,6 +21,22 @@
         
     }
 
+    if (isset($_POST["btnUpdateUser"])) {
+        $id = $_POST["id"];
+        $nombre = $_POST["nombre_" . $id];
+        $apellido = $_POST["apellido_" . $id];
+        ActualizarUsuario($id, $nombre, $apellido);
+
+        if ($result) {
+            echo '<script>console.log("Usuario actualizado successfully.");</script>';
+        } else {
+            echo '<script>console.error("Error updating usuario.");</script>';
+        }
+
+        header("location: ../Views/login.php");
+    }
+    
+
     if(isset($_POST["btnInicio"]))
     {
         $Correo = $_POST["txtCorreo"];

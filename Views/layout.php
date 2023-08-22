@@ -5,9 +5,34 @@ include_once '../Controllers/productoController.php';
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
-
-    
 }
+
+
+function ConsultarUsuarios()
+{
+    $respuesta = cargarUsuarios();
+
+    if ($respuesta->num_rows > 0) {
+        while ($fila = mysqli_fetch_array($respuesta)) {
+            echo    '        
+            <tr>
+                <form id="form_' . $fila["id"] . '" method="post">
+                    <td><input type="text" name="nombre_' . $fila["id"] . '" value="' . $fila["nombre"] . '"></td>
+                    <td><input type="text" name="apellido_' . $fila["id"] . '" value="' . $fila["apellido"] . '"></td>
+                    <td>' . $fila["correo"] . '</td>
+                    <td>
+                        <input type="hidden" name="id_" value="' . $fila["id"] . '">
+                        <button type="submit" name="btnUpdateUser_' . $fila["id"] . '" class="btn btn-success">Actualizar</button>
+                    </td>
+                </form>
+            </tr>';
+        }
+    }
+}
+
+
+
+
 function mostrarHeader()
 {
     consultarResumenCarrito();
@@ -15,62 +40,112 @@ function mostrarHeader()
     {
        header("location: login.php");
     }
-
-?>
-    <!-- ***** Header Area Start ***** -->
-    <header class="header-area header-sticky">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <nav class="main-nav">
-                        <!-- ***** Logo Start ***** -->
-                        <a href="home.php" class="logo">
-                            <img src="assets/images/logo.png">
-                        </a>
-                        <!-- ***** Logo End ***** -->
-                        <!-- ***** Menu Start ***** -->
-                        <ul class="nav">
-                            
-                            <li class="scroll-to-section"><a href="home.php">Inicio</a></li>
-                            <li class="submenu">
-                                <a href="javascript:;">Páginas</a>
-                                <ul>
-                                    <li><a href="about.php">Sobre Nosotros</a></li>
-                                    <li><a href="products.php">Productos</a></li>
-                                    <li><a href="categories.php">Categorías</a></li>
-
-                                </ul>
-                            </li>
-                            <li class="submenu">
-                                <a href="javascript:;">Cuenta</a>
-                                <ul>
-                                    <form action="" method="post"> 
-                                    <li><a href="#"onclick="cerrarSesion();">Cerrar Sesión</a></li>
-                                    <li><a href="single-product.php">Cambiar Contraseña</a></li>
-                                    </form>
-                                </ul>
-                            </li>
-                            </li>
-                            <?php if ($_SESSION["cantidadCarrito"] > 0) {?>
-                            <li style= "margin-right: 0px;"><a href="carrito.php"> <i class="fa fa-cart-plus fa-lg"> <?php echo $_SESSION["cantidadCarrito"] . '&nbsp;&nbsp;$' . $_SESSION["totalCarrito"];?> </i></a></li>
-                            <?php }?>
-                            <li style= "margin-left: 60px ; pointer-events: none;"><a href="#"><?php echo $_SESSION["NombreUsuario"] . " " .  $_SESSION["ApellidoUsuario"] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_SESSION["NombreRolUsuario"];?></a></li>
-                        </ul>
-
-                        
-
-                        <a class='menu-trigger'>
-                            <span>Menu</span>
-                        </a>
-                        <!-- ***** Menu End ***** -->
-                    </nav>
+    
+    if ($_SESSION["RolUsuario"] == 0) {
+        echo '
+        <!-- ***** Header Area Start ***** -->
+        <header class="header-area header-sticky">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <nav class="main-nav">
+                            <!-- ***** Logo Start ***** -->
+                            <a href="home.php" class="logo">
+                                <img src="assets/images/logo.png">
+                            </a>
+                            <!-- ***** Logo End ***** -->
+                            <!-- ***** Menu Start ***** -->
+                            <ul class="nav">
+                                <li class="scroll-to-section"><a href="home.php">Inicio</a></li>
+                                <li class="submenu">
+                                    <a href="javascript:;">Páginas</a>
+                                    <ul>
+                                        <li><a href="about.php">Sobre Nosotros</a></li>
+                                        <li><a href="products.php">Productos</a></li>
+                                        <li><a href="categories.php">Categorías</a></li>
+                                    </ul>
+                                </li>
+                                <li class="submenu">
+                                    <a href="javascript:;">Cuenta</a>
+                                    <ul>
+                                        <form action="" method="post"> 
+                                        <li><a href="#" onclick="cerrarSesion();">Cerrar Sesión</a></li>
+                                        <li><a href="single-product.php">Cambiar Contraseña</a></li>
+                                        </form>
+                                    </ul>
+                                </li>
+                                ' . ($_SESSION["cantidadCarrito"] > 0 ? '
+                                <li style="margin-right: 0px;"><a href="carrito.php"> <i class="fa fa-cart-plus fa-lg"></i> ' . $_SESSION["cantidadCarrito"] . '&nbsp;&nbsp;$' . $_SESSION["totalCarrito"] . '</a></li>' : '') . '
+                                <li style="margin-left: 60px; pointer-events: none;"><a href="#">' . $_SESSION["NombreUsuario"] . " " .  $_SESSION["ApellidoUsuario"] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_SESSION["NombreRolUsuario"] . '</a></li>
+                            </ul>
+                            <a class="menu-trigger">
+                                <span>Menu</span>
+                            </a>
+                            <!-- ***** Menu End ***** -->
+                        </nav>
+                    </div>
                 </div>
             </div>
-        </div>
-        <script src="usuario.js"></script>
+            <script src="usuario.js"></script>';
 
+    }
 
-        
+    if ($_SESSION["RolUsuario"] == 1) {
+        echo '
+        <!-- ***** Header Area Start ***** -->
+        <header class="header-area header-sticky">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <nav class="main-nav">
+                            <!-- ***** Logo Start ***** -->
+                            <a href="home.php" class="logo">
+                                <img src="assets/images/logo.png">
+                            </a>
+                            <!-- ***** Logo End ***** -->
+                            <!-- ***** Menu Start ***** -->
+                            <ul class="nav">
+                                <li class="scroll-to-section"><a href="home.php">Inicio</a></li>
+                                <li class="submenu">
+                                    <a href="javascript:;">Páginas</a>
+                                    <ul>
+                                        <li><a href="about.php">Sobre Nosotros</a></li>
+                                        <li><a href="products.php">Productos</a></li>
+                                        <li><a href="categories.php">Categorías</a></li>
+                                    </ul>
+                                </li>
+                                <li class="submenu">
+                                    <a href="javascript:;">Cuenta</a>
+                                    <ul>
+                                        <form action="" method="post"> 
+                                        <li><a href="#" onclick="cerrarSesion();">Cerrar Sesión</a></li>
+                                        <li><a href="single-product.php">Cambiar Contraseña</a></li>
+                                        </form>
+                                    </ul>
+                                </li>
+                                <li class="submenu">
+                                    <a href="javascript:;">Gestionar</a>
+                                    <ul>
+                                        <li><a href="Gestionar_usuarios.php">Usuario</a></li>
+                                    </ul>
+                                </li>
+                                ' . ($_SESSION["cantidadCarrito"] > 0 ? '
+                                <li style="margin-right: 0px;"><a href="carrito.php"> <i class="fa fa-cart-plus fa-lg"></i> ' . $_SESSION["cantidadCarrito"] . '&nbsp;&nbsp;$' . $_SESSION["totalCarrito"] . '</a></li>' : '') . '
+                                <li style="margin-left: 60px; pointer-events: none;"><a href="#">' . $_SESSION["NombreUsuario"] . " " .  $_SESSION["ApellidoUsuario"] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_SESSION["NombreRolUsuario"] . '</a></li>
+                            </ul>
+                            <a class="menu-trigger">
+                                <span>Menu</span>
+                            </a>
+                            <!-- ***** Menu End ***** -->
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <script src="usuario.js"></script>
+        </header>';
+    }
+?>
+     
 
 <!-- jQuery -->
 <script src="assets/js/jquery-2.1.0.min.js"></script>
