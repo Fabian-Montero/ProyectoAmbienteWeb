@@ -101,7 +101,9 @@ https://templatemo.com/tm-571-hexashop
         
             <div class="row">
             
-            <?php cargarProductos(); ?>
+            <?php 
+            cargarProductos(150); 
+            ?>
 
                 
             </div>

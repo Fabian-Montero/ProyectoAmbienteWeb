@@ -8,7 +8,16 @@
         $respuesta = $enlace -> query($sentencia);
         CloseBD($enlace);
         return $respuesta;
-    }    
+    }
+    
+    function cargarProductosCategoriasM($categoria)
+    {
+        $enlace = OpenBD();
+        $sentencia = "CALL cargarProductosCategorias('$categoria')";
+        $respuesta = $enlace -> query($sentencia);
+        CloseBD($enlace);
+        return $respuesta;
+    }   
 
     function cargarProductoM($id){
         $enlace = OpenBD();

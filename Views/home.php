@@ -74,7 +74,7 @@ https://templatemo.com/tm-571-hexashop
                                 <h4>Somos Hexashop</h4>
                                 <span>La tienda en la que encontrará sus productos favoritos</span>
                                 <div class="main-border-button">
-                                    <a href="products.php">Compra Ahora!</a>
+                                    <a href="../Views/products.php?cat_id=150">Compra Ahora!</a>
                                 </div>
                             </div>
                             <img src="assets/images/left-banner-image.jpg" alt="">
@@ -96,7 +96,7 @@ https://templatemo.com/tm-571-hexashop
                                                 <h4>Muebles</h4>
                                                 <p>Lo necesario en muebles para su hogar</p>
                                                 <div class="main-border-button">
-                                                    <a href="#">Ver más</a>
+                                                    <a href="../Views/products.php?cat_id=7">Ver más</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -109,14 +109,13 @@ https://templatemo.com/tm-571-hexashop
                                     <div class="thumb">
                                         <div class="inner-content">
                                             <h4 style= "text-shadow: 6px 6px 10px rgba(0, 0, 0, 10)">Vestidos de Mujer</h4>
-                                            
                                         </div>
                                         <div class="hover-content">
                                             <div class="inner">
                                                 <h4>Vestidos de Mujer</h4>
                                                 <p>Variedad en vestidos para mujer</p>
                                                 <div class="main-border-button">
-                                                    <a href="#">Ver más</a>
+                                                    <a href="../Views/products.php?cat_id=9">Ver más</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -136,7 +135,7 @@ https://templatemo.com/tm-571-hexashop
                                                 <h4 >Zapatos de Hombre</h4>
                                                 <p>Variedad en zapatos para hombre</p>
                                                 <div class="main-border-button">
-                                                    <a href="#">Ver más</a>
+                                                    <a href="../Views/products.php?cat_id=12">Ver más</a>>
                                                 </div>
                                             </div>
                                         </div>

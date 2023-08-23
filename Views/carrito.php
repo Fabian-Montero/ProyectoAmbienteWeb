@@ -128,7 +128,7 @@ https://templatemo.com/tm-571-hexashop
                                                 </form>    
 
                                                     <div class="pt-5">
-                                                    <h6 class="mb-0"><a href="products.php" class="text-body"><i
+                                                    <h6 class="mb-0"><a href="../Views/products.php?cat_id=150" class="text-body"><i
                                                                 class="fas fa-long-arrow-alt-left me-2"></i>Volver a comprar</a></h6>
                                                 </div>
 

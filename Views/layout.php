@@ -36,7 +36,7 @@ function mostrarHeader()
                                 <a href="javascript:;">Páginas</a>
                                 <ul>
                                     <li><a href="about.php">Sobre Nosotros</a></li>
-                                    <li><a href="products.php">Productos</a></li>
+                                    <li><a href="../Views/products.php?cat_id=150">Productos</a></li>
                                     <li><a href="categories.php">Categorías</a></li>
 
                                 </ul>
@@ -152,7 +152,7 @@ function mostrarFooter()
                     <ul>
                         <li><a href="home.php">Inicio</a></li>
                         <li><a href="about.php">Sobre Nosotros</a></li>
-                        <li><a href="products.php">Productos</a></li>
+                        <li><a href="../Views/products.php?cat_id=150">Productos</a></li>
 
                     </ul>
                 </div>
