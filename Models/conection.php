@@ -2,7 +2,7 @@
 
     function OpenBD()
     {
-        return mysqli_connect("127.0.0.1:3307", "root", "", "ambienteweb17_08");
+        return mysqli_connect("127.0.0.1:3307", "root", "", "ambienteweb22_08");
         
     }
 

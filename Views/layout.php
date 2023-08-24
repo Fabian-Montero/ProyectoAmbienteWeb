@@ -42,7 +42,7 @@ function mostrarHeader()
     }
     
     if ($_SESSION["RolUsuario"] == 0) {
-        echo '
+        echo ' 
         <!-- ***** Header Area Start ***** -->
         <header class="header-area header-sticky">
             <div class="container">
@@ -60,9 +60,9 @@ function mostrarHeader()
                                 <li class="submenu">
                                     <a href="javascript:;">Páginas</a>
                                     <ul>
-                                        <li><a href="about.php">Sobre Nosotros</a></li>
-                                        <li><a href="products.php">Productos</a></li>
+                                        <li><a href="products.php?cat_id=150"">Productos</a></li>
                                         <li><a href="categories.php">Categorías</a></li>
+                                        <li><a href="compras.php">Mis Compras</a></li>
                                     </ul>
                                 </li>
                                 <li class="submenu">
@@ -74,10 +74,17 @@ function mostrarHeader()
                                         </form>
                                     </ul>
                                 </li>
-                                ' . ($_SESSION["cantidadCarrito"] > 0 ? '
-                                <li style="margin-right: 0px;"><a href="carrito.php"> <i class="fa fa-cart-plus fa-lg"></i> ' . $_SESSION["cantidadCarrito"] . '&nbsp;&nbsp;$' . $_SESSION["totalCarrito"] . '</a></li>' : '') . '
-                                <li style="margin-left: 60px; pointer-events: none;"><a href="#">' . $_SESSION["NombreUsuario"] . " " .  $_SESSION["ApellidoUsuario"] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_SESSION["NombreRolUsuario"] . '</a></li>
-                            </ul>
+                                
+                                '?>
+                                <?php
+                                    if ($_SESSION["cantidadCarrito"] > 0) {
+                                        echo '<li style="margin-right: 0px;"><a href="carrito.php"><i class="fa fa-cart-plus fa-lg"></i> ' . $_SESSION["cantidadCarrito"] . '&nbsp;&nbsp;$' . $_SESSION["totalCarrito"] . '</a></li>';
+                                    }
+
+                                    echo '<li style="margin-left: 60px; pointer-events: none;"><a href="#">' . $_SESSION["NombreUsuario"] .  " " .  $_SESSION["ApellidoUsuario"] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_SESSION["NombreRolUsuario"]  .'</a></li>';
+                                ?>
+
+                                </ul>
                             <a class="menu-trigger">
                                 <span>Menu</span>
                             </a>
@@ -88,8 +95,9 @@ function mostrarHeader()
             </div>
             <script src="usuario.js"></script>';
 
-    }
-
+    <?php }?>
+    
+    <?php
     if ($_SESSION["RolUsuario"] == 1) {
         echo '
         <!-- ***** Header Area Start ***** -->
@@ -110,8 +118,9 @@ function mostrarHeader()
                                     <a href="javascript:;">Páginas</a>
                                     <ul>
                                         <li><a href="about.php">Sobre Nosotros</a></li>
-                                        <li><a href="../Views/products.php?cat_id=150">Productos</a></li>
+                                        <li><a href="products.php?cat_id=150">Productos</a></li>
                                         <li><a href="categories.php">Categorías</a></li>
+                                        <li><a href="compras.php">Mis Compras</a></li>
                                     </ul>
                                 </li>
                                 <li class="submenu">
@@ -129,10 +138,15 @@ function mostrarHeader()
                                         <li><a href="Gestionar_usuarios.php">Usuario</a></li>
                                     </ul>
                                 </li>
-                                ' . ($_SESSION["cantidadCarrito"] > 0 ? '
-                                <li style="margin-right: 0px;"><a href="carrito.php"> <i class="fa fa-cart-plus fa-lg"></i> ' . $_SESSION["cantidadCarrito"] . '&nbsp;&nbsp;$' . $_SESSION["totalCarrito"] . '</a></li>' : '') . '
-                                <li style="margin-left: 60px; pointer-events: none;"><a href="#">' . $_SESSION["NombreUsuario"] . " " .  $_SESSION["ApellidoUsuario"] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_SESSION["NombreRolUsuario"] . '</a></li>
-                            </ul>
+                                '?>
+                                <?php
+                                    if ($_SESSION["cantidadCarrito"] > 0) {
+                                        echo '<li style="margin-right: 0px;"><a href="carrito.php"><i class="fa fa-cart-plus fa-lg"></i> ' . $_SESSION["cantidadCarrito"] . '&nbsp;&nbsp;$' . $_SESSION["totalCarrito"] . '</a></li>';
+                                    }
+
+                                    echo '<li style="margin-left: 60px; pointer-events: none;"><a href="#">' . $_SESSION["NombreUsuario"] .  " " .  $_SESSION["ApellidoUsuario"] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $_SESSION["NombreRolUsuario"]  .'</a></li>';
+                                ?>
+                                </ul>
                             <a class="menu-trigger">
                                 <span>Menu</span>
                             </a>
@@ -143,9 +157,9 @@ function mostrarHeader()
             </div>
             <script src="usuario.js"></script>
         </header>';
-    }
-?>
-     
+    
+    <?php }?>
+
 
 <!-- jQuery -->
 <script src="assets/js/jquery-2.1.0.min.js"></script>
@@ -190,8 +204,6 @@ function mostrarHeader()
     </header>
     <!-- ***** Header Area End ***** -->
 <?php
-
-
 }
 ?>
 
@@ -217,17 +229,18 @@ function mostrarFooter()
                 <div class="col-lg-3">
                     <h4>Categorías</h4>
                     <ul>
-                        <li><a href="#">Muebles</a></li>
-                        <li><a href="#">Vestidos de Mujer</a></li>
-                        <li><a href="#">Zapatos de Hombre</a></li>
+                        <li><a href="../Views/products.php?cat_id=7">Muebles</a></li>
+                        <li><a href="../Views/products.php?cat_id=9">Vestidos de Mujer</a></li>
+                        <li><a href="../Views/products.php?cat_id=12">Zapatos de Hombre</a></li>
+                        <li><a href="categories.php">Más categorías</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-3">
                     <h4>Links Útiles</h4>
                     <ul>
                         <li><a href="home.php">Inicio</a></li>
-                        <li><a href="about.php">Sobre Nosotros</a></li>
                         <li><a href="../Views/products.php?cat_id=150">Productos</a></li>
+                        <li><a href="compras.php">Mis Compras</a></li>
 
                     </ul>
                 </div>

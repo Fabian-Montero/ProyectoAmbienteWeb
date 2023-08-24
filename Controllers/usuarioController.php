@@ -57,11 +57,12 @@
                 $_SESSION["ApellidoUsuario"] = $datos["apellido"];
                 $_SESSION["IdUsuario"] = $datos["id"];
                 $_SESSION["RolUsuario"] = $datos["IdRoles"];
-                if ($_SESSION["RolUsuario" == 1]){
+                if ($_SESSION["RolUsuario"] == "1") {
                     $_SESSION["NombreRolUsuario"] = "Administrador";
-                }else{
+                } else {
                     $_SESSION["NombreRolUsuario"] = "Cliente";
                 }
+                
                 
 
                 header("location: ../Views/home.php");
@@ -127,7 +128,12 @@
             $_SESSION["ApellidoUsuario"] = $datos["apellido"];
             $_SESSION["IdUsuario"] = $datos["id"];
             $_SESSION["RolUsuario"] = $datos["IdRoles"];
-            $_SESSION["NombreRolUsuario"] = $datos["NombreRol"];
+            if ($_SESSION["RolUsuario"] == "1") {
+                $_SESSION["NombreRolUsuario"] = "Administrador";
+            } else {
+                $_SESSION["NombreRolUsuario"] = "Cliente";
+            }
+            
             header("location: ../Views/home.php");
         }
         else
