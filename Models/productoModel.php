@@ -80,6 +80,22 @@
         CloseBD($enlace);
         return $respuesta;
     }
+
+    function consultarDetalleComprasM($idUsuario){
+        $enlace = OpenBD();
+        $sentencia = "CALL consultarDetalleCompras('$idUsuario')";
+        $respuesta = $enlace -> query($sentencia);
+        CloseBD($enlace);
+        return $respuesta;
+    }
+
+    function consultarDetalleComprasCantidadM($idUsuario){
+        $enlace = OpenBD();
+        $sentencia = "CALL consultarDetalleComprasCantidad('$idUsuario')";
+        $respuesta = $enlace -> query($sentencia);
+        CloseBD($enlace);
+        return $respuesta;
+    }
     
     
     

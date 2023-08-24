@@ -345,6 +345,19 @@ if(isset($_POST["search-button"]))
         }
 
     }
+    function consultarDetalleComprasCantidad(){
+
+        $idUsuario = $_SESSION["IdUsuario"];
+        $respuesta = consultarDetalleComprasCantidadM($idUsuario);
+        
+        $_SESSION["cantidadCompras"] = 0;
+        if ($respuesta -> num_rows > 0){
+            $datos = mysqli_fetch_array($respuesta);
+
+            $_SESSION["cantidadCompras"] = $datos["Cantidad"];
+        }
+
+    }
 
     function consultarDetalleCarrito(){
         $idUsuario = $_SESSION["IdUsuario"];
@@ -388,16 +401,53 @@ if(isset($_POST["search-button"]))
                                                 }
                                                 </style>
                 ';
-
-
-
             }
-
-
         }
-
     }
-    
-    
+
+    function consultarDetalleCompras(){
+        $idUsuario = $_SESSION["IdUsuario"];
+        $respuesta = consultarDetalleComprasM($idUsuario);
+        
+
+        if ($respuesta -> num_rows > 0){
+            
+            while($producto = mysqli_fetch_array($respuesta)){
+
+                echo
+                '
+                <form role="form" class="text-start action="" method="post">
+                <div class=" row mb-4 d-flex justify-content-between align-items-center">
+                                                    <div class="col-md-2 col-lg-2 col-xl-2">
+                                                        <img src=' . $producto["url_imagen"] . '
+                                                            class="img-fluid rounded-3" alt="Cotton T-shirt">
+                                                    </div>
+                                                    <div class="col-md-3 col-lg-3 col-xl-3">
+                                                        <h6 class="text-muted">' . $producto["nombre"] . '</h6>
+                                                        <h6 class="text-black mb-0">' . $producto["nombre_categoria"] . '</h6>
+                                                    </div>
+                                                    <div>
+                                                        <input type="text" disabled id="tentacles" value="' . $producto["cantidad_productos"] . '" name="tentacles" min="1" max="100" />
+                                                        <input type="hidden" name= "txtIdProducto" id="txtIdProducto" value= " '. $producto["producto_id"] . '  "/>
+                                                        
+
+                                                        </div>
+                                                    <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                                                        <h6 style="font-size: 15px"class="mb-0">$ ' . $producto["total"] . '</h6>
+                                                    </div>
+                                                </div>
+                                                </form>
+                                                <hr class="my-4">
+                                                <style>
+                                                .scrollCarrito {
+                                                    width: 1400px; 
+                                                    height: 800px; 
+                                                    overflow: auto;
+                                                }
+                                                </style>
+                ';
+            }
+        }
+    }
 
 ?>

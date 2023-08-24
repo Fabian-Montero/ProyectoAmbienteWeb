@@ -57,7 +57,6 @@ https://templatemo.com/tm-571-hexashop
 
     <?php
         mostrarHeader();
-
     ?>
 
     <!-- ***** Main Banner Area Start ***** -->
@@ -66,8 +65,8 @@ https://templatemo.com/tm-571-hexashop
             <div class="row">
                 <div class="col-lg-12">
                     <div class="inner-content">
-                        <h2>Carrito</h2>
-                        <span>Aquí podrá ver todos sus productos antes de proceder con el pago</span>
+                        <h2>Tus compras</h2>
+                        <span>Aquí podrá encontrar el historial de todos los productos que ha encontrado en la tienda</span>
                     </div>
                 </div>
             </div>
@@ -75,7 +74,10 @@ https://templatemo.com/tm-571-hexashop
     </div>
     <!-- ***** Main Banner Area End ***** -->
 
-    
+    <?php
+        consultarDetalleComprasCantidad();
+    ?>
+
     <div class="about-us">
         <div class=" scrollCarrito container">
             
@@ -89,17 +91,20 @@ https://templatemo.com/tm-571-hexashop
                             <div class="card card-registration card-registration-2" style="border-radius: 15px;">
                                 <div class="card-body p-0">
                                     <div class="row g-0">
-                                        <div class="col-lg-8">
+                                        <div class="col-lg-12">
                                             <div class="p-5">
                                                 <div class="  d-flex justify-content-between align-items-center mb-5">
-                                                    <h1 class="fw-bold mb-0 text-black">Carrito</h1>
-                                                    <h6 class="mb-0 text-muted"> <?php echo $_SESSION["cantidadCarrito"];?> items</h6>
+                                                    <h1 class="fw-bold mb-0 text-black">Compras</h1>
+                                                    <h6 class="mb-0 text-muted"> <?php echo $_SESSION["cantidadCompras"];?> items</h6>
+                                                    <h6 class="mb-0"><a href="../Views/home.php" class="text-body"><i
+                                                                class="fas fa-long-arrow-alt-left me-2"></i>Volver al inicio</a></h6>
                                                 </div>
                                                 <hr class="my-4">
 
                                                 <!-- Inicio producto carrito -->
                                                 <?php
-                                                consultarDetalleCarrito();
+                                                consultarDetalleComprasCantidad();
+                                                consultarDetalleCompras();
                                                 ?>
 
                                                 <!-- Final producto carrito  -->
@@ -107,33 +112,7 @@ https://templatemo.com/tm-571-hexashop
                                                 
                                             </div>
                                         </div>
-                                        <div class="col-lg-4 bg-grey">
-                                            <div class="p-5">
-                                                <h3 class="fw-bold mb-5 mt-2 pt-1">Resumen</h3>
-                                                <hr class="my-4">
-
-                                                <div class="d-flex justify-content-between mb-4">
-                                                    <h5 class="text-uppercase">items <?php echo $_SESSION["cantidadCarrito"];?></h5>
-            
-                                                </div>
-                                                <hr class="my-4">
-
-                                                <div class="d-flex justify-content-between mb-5">
-                                                    <h5 style="font-size: 19px"class="text-uppercase">Precio Total</h5>
-                                                    <h5> &nbsp;$ <?php echo $_SESSION["totalCarrito"];?></h5>
-                                                </div>
-                                                <form role="form" class="text-start action="" method="post">
-                                                <button type="submit" name="btnPagar" id ="btnPagar" class="btn btn-dark btn-block btn-lg"
-                                                    data-mdb-ripple-color="dark">Pagar</button>
-                                                </form>    
-
-                                                    <div class="pt-5">
-                                                    <h6 class="mb-0"><a href="../Views/products.php?cat_id=150" class="text-body"><i
-                                                                class="fas fa-long-arrow-alt-left me-2"></i>Volver a comprar</a></h6>
-                                                </div>
-
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
