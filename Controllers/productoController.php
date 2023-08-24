@@ -59,6 +59,60 @@ function cargarProductos($all){
         }    
 }
 
+function cargarProductosMantenimiento(){
+    
+    $respuesta = cargarProductosMantenimientoM();
+    $_SESSION["cantidadProductosMantenimiento"] = 0;
+    if ($respuesta-> num_rows > 0)
+    {
+        while($producto = mysqli_fetch_array($respuesta)){
+            echo
+            '
+            <form role="form" class="text-start action="" method="post">
+            <div class=" row mb-4 d-flex justify-content-between align-items-center">
+                                                <div class="col-md-2 col-lg-2 col-xl-2">
+                                                    <img src=' . $producto["url_imagen"] . '
+                                                        class="img-fluid rounded-3" alt="Cotton T-shirt">
+                                                </div>
+                                                <div class="col-md-3 col-lg-3 col-xl-3">
+                                                    <h6 class="text-muted">' . $producto["nombreProducto"] . '</h6>
+                                                    <h6 class="text-black mb-0">' . $producto["nombre_categoria"] . '</h6>
+                                                </div>
+                                                <div>
+                                                    <input type="text" disabled size="1" id="txtCantidadStock" value="' . $producto["cantidad_stock"] . '" name="txtCantidadStock" min="1" max="99" />
+                                                    <input type="hidden"  name= "txtIdProducto" id="txtIdProducto" value= " '. $producto["idProducto"] . '  "/>
+                                                    <button style="margin-left:130px;"type="submit" name="btnEliminar" id="btnEliminar"class="btn-icon">
+                                                    <span class="material-symbols-outlined">
+                                                    delete
+                                                    </span>
+                                                    </button>
+                                                    <button style="margin-left: 5px;" type="submit" name="btnEditarProducto" id="btnEditarProducto" class="btn-icon">
+                                                        <span class="material-symbols-outlined">
+                                                            edit
+                                                        </span>
+                                                    </button>
+                                        
+                                                    
+
+
+                                                    </div>
+                                                <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                                                    <h6 style="font-size: 15px"class="mb-0">$ ' . $producto["precio"] . '</h6>
+                                                </div>
+                                            </div>
+                                            </form>
+                                            <hr class="my-4">
+                                            <style>
+                                            .scrollCarrito {
+                                                width: 1400px; 
+                                                height: 800px; 
+                                                overflow: auto;
+                                            }
+                                            </style>
+            '; }}
+        }    
+
+
 
 function cargarProductosCategorias($categoria){
     $respuesta = cargarProductosCategoriasM($categoria);
@@ -315,7 +369,6 @@ if(isset($_POST["search-button"]))
     if(isset($_POST["btnEliminar"]))
     {
         $idProducto = $_POST["txtIdProducto"];
-
         eliminarProductoCarritoM($idProducto);
         
     }
@@ -358,6 +411,21 @@ if(isset($_POST["search-button"]))
         }
 
     }
+
+    function consultarProductosMantenimiento(){
+
+        $respuesta = consultarProductosMantenimientoM();
+    
+        $_SESSION["cantidadProductosMantenimiento"] = 0;
+        
+        if ($respuesta -> num_rows > 0){
+            $datos = mysqli_fetch_array($respuesta);
+
+            $_SESSION["cantidadProductosMantenimiento"] = $datos["cantidadProductosMantenimiento"];
+        }
+
+    }
+    
 
     function consultarDetalleCarrito(){
         $idUsuario = $_SESSION["IdUsuario"];

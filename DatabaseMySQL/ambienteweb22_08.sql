@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Aug 02, 2023 at 04:32 AM
+-- Generation Time: Aug 24, 2023 at 10:45 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ambienteweb01_08`
+-- Database: `ambienteweb22_08`
 --
 
 DELIMITER $$
@@ -49,6 +49,25 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ActualizarContrasenna` (IN `pIdClie
 	WHERE Id = pIdCliente;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ActualizarUsuario` (IN `pIdCliente` INT, IN `pNombre` VARCHAR(25), IN `pApellido` VARCHAR(25))   BEGIN
+	UPDATE clientes
+	SET nombre = pNombre,
+    apellido = pApellido
+	WHERE Id = pIdCliente;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `agregarCarrito` (IN `pIdProducto` INT, IN `pIdCliente` INT, IN `pCantidad` INT, IN `pTotal` DECIMAL(10,2))   BEGIN
+
+INSERT INTO usuario_carrito
+(`cliente_id`,
+`producto_id`,
+`cantidad_productos`,
+`total`)
+VALUES
+(pIdCliente, pIdProducto, pCantidad, pTotal);
+
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `cargarCategorias` ()   BEGIN
 SELECT * FROM categorias;
 END$$
@@ -57,8 +76,27 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `cargarProducto` (IN `pIdProducto` I
 SELECT * FROM productos WHERE id = pIdProducto;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `cargarProductoName` (IN `pName` VARCHAR(25))   BEGIN
+SELECT * FROM productos WHERE nombre = pName;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `cargarProductos` ()   BEGIN
-SELECT * FROM productos;
+SELECT * 
+FROM productos;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `cargarProductosCategorias` (IN `pCategoriaId` INT)   BEGIN
+SELECT * FROM productos where categoria_id = pCategoriaId;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `cargarProductosMantenimiento` ()   BEGIN
+SELECT P.url_imagen, P.cantidad_stock, P.precio, P.id as idProducto, C.nombre as nombre_categoria, P.nombre as nombreProducto
+FROM productos P
+INNER JOIN categorias C ON P.categoria_id = C.id;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `cargarUsuarios` ()   BEGIN
+SELECT * FROM clientes;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ConsultarDatos` (IN `pCorreo` VARCHAR(50))   BEGIN
@@ -71,17 +109,91 @@ SELECT  id,
         ciudad,
         pais,
         contrasenna,
-		activo
+		activo,
+        IdRoles
 FROM 	clientes
 WHERE 	correo = pCorreo
     AND activo = 1;
 
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `consultarDetalleCarrito` (IN `pIdUsuario` INT)   BEGIN
+SELECT P.nombre,
+P.url_imagen,
+UC.total,
+C.nombre 'nombre_categoria',
+UC.cantidad_productos,
+UC.producto_id
+FROM usuario_carrito UC
+INNER JOIN productos P ON P.id = UC.producto_id
+INNER JOIN categorias C ON P.categoria_id = C.id
+WHERE 
+cliente_id = pIdUsuario;
+
+
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `consultarDetalleCompras` (IN `pIdUsuario` INT)   BEGIN
+SELECT P.nombre,
+P.url_imagen,
+UP.total,
+C.nombre 'nombre_categoria',
+UP.producto_id,
+UP.cantidad_productos,
+UP.total
+FROM usuario_producto UP
+
+INNER JOIN productos P ON P.id = UP.producto_id
+INNER JOIN categorias C ON P.categoria_id = C.id
+
+WHERE 
+cliente_id = pIdUsuario
+order by UP.producto_id desc;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `consultarDetalleComprasCantidad` (IN `pIdUsuario` INT)   BEGIN
+select sum(cantidad_productos) as Cantidad
+from usuario_producto
+where cliente_id = pIdUsuario;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `consultarProductosMantenimiento` ()   BEGIN
+SELECT COUNT(ID) AS cantidadProductosMantenimiento FROM PRODUCTOS;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `consultarResumenCarrito` (IN `pIdUsuario` INT)   BEGIN
+    SELECT SUM(cantidad_productos) AS Cantidad,
+           SUM(total) AS Total
+    FROM usuario_carrito 
+    WHERE cliente_id = pIdUsuario;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarCursoCarritoM` (IN `pIdProducto` INT)   BEGIN
+DELETE FROM usuario_carrito 
+WHERE producto_id = pIdProducto;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarProductoCarrito` (IN `pIdProducto` INT)   BEGIN
+DELETE FROM usuario_carrito 
+WHERE producto_id = pIdProducto;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pagarCarrito` (IN `pIdUsuario` INT)   BEGIN
+
+INSERT INTO usuario_producto
+(`cliente_id`,`producto_id`,`cantidad_productos`,`total`)
+
+SELECT cliente_id, producto_id, cantidad_productos, total FROM usuario_carrito
+WHERE cliente_id = pIdUsuario;
+
+DELETE FROM usuario_carrito WHERE cliente_id = pIdUsuario;
+
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `RegistrarUsuario` (IN `pNombre` VARCHAR(255), IN `pApellidos` VARCHAR(255), IN `pCorreo` VARCHAR(255), IN `pDireccion` VARCHAR(255), IN `pCiudad` VARCHAR(255), IN `pPais` VARCHAR(255), IN `pContrasenna` VARCHAR(255))   BEGIN
 
-INSERT INTO clientes (`nombre`,`apellido`,`correo`,`direccion`,`ciudad`,`pais`,`contrasenna`,`activo`)
-VALUES ( pNombre, pApellidos, pCorreo, pDireccion, pCiudad, pPais, pContrasenna, 1);
+INSERT INTO clientes (`nombre`,`apellido`,`correo`,`direccion`,`ciudad`,`pais`,`contrasenna`,`activo`,`IdRoles`)
+VALUES ( pNombre, pApellidos, pCorreo, pDireccion, pCiudad, pPais, pContrasenna, 1, 2);
 
 END$$
 
@@ -112,9 +224,9 @@ SELECT  id,
         direccion,
         ciudad,
         pais,
-        contrasenna,
 		activo,
-        contrasenna_temporal
+        contrasenna_temporal,
+        IdRoles
 FROM 	clientes
 WHERE 	correo = pCorreo
 	AND	contrasenna = pContrasenna
@@ -123,17 +235,6 @@ WHERE 	correo = pCorreo
 END$$
 
 DELIMITER ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `carritos`
---
-
-CREATE TABLE `carritos` (
-  `id` int(11) NOT NULL,
-  `cliente_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -203,21 +304,9 @@ INSERT INTO `clientes` (`id`, `nombre`, `apellido`, `correo`, `direccion`, `ciud
 (1, 'Michael', 'Arias', 'michaelarias980@gmail.com', 'San jose, Alajuelita', 'San José', 'Costa Rica', 'secreta', b'1', NULL, NULL, 0),
 (4, 'kenny', 'cardenas', 'kennycardenas@gmail.com', 'Cartago,Guarco', 'San José', 'Costa Rica', 'secreta', b'1', NULL, NULL, 0),
 (5, 'Michael', 'Arias', 'marias80378@ufide.ac.cr', 'Cartago,Guarco', 'San José', 'Costa Rica', '4413', b'1', NULL, NULL, 0),
-(12, 'Fabian', 'Montero Madrigal', 'fabianja0477@gmail.com', 'Barrio el Carmen', 'Coronado', 'Costa Rica', 'ufide', b'1', NULL, NULL, 0),
-(13, 'Josue ', 'Torres', 'josue@gmail.com', 'Buenos aires barrio mulcaz', 'Buenos aires ', 'Argentina ', '12345', b'1', NULL, NULL, 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `detalle_carritos`
---
-
-CREATE TABLE `detalle_carritos` (
-  `carrito_id` int(11) NOT NULL,
-  `producto_id` int(11) NOT NULL,
-  `cantidad_productos` int(11) NOT NULL,
-  `total` decimal(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+(12, 'Fabian', 'Montero Madrigal', 'fabianja0477@gmail.com', 'Barrio el Carmen', 'Coronado', 'Costa Rica', 'ufide', b'1', NULL, NULL, 1),
+(13, 'Josue ', 'Torres', 'josue@gmail.com', 'Buenos aires barrio mulcaz', 'Buenos aires ', 'Argentina ', '12345', b'1', NULL, NULL, 0),
+(14, 'benjamin', 'zuniga', 'zunigabenja1@gmail.com', 'mercedes', 'heredia', 'CR', '111', b'1', NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -314,7 +403,7 @@ INSERT INTO `productos` (`id`, `nombre`, `precio`, `descripcion`, `cantidad_stoc
 (998, 'women\'s shoes', '40.00', 'Close: Lace, Style with bottom: Increased inside, Sole Material: Rubber', 61, 10, 'https://i.dummyjson.com/data/products/46/1.webp'),
 (999, 'Sneaker shoes', '120.00', 'Synthetic Leather Casual Sneaker shoes for Women/girls Sneakers For Women', 65, 10, 'https://i.dummyjson.com/data/products/47/1.jpg'),
 (1000, 'Women Strip Heel', '40.00', 'Features: Flip-flops, Mid Heel, Comfortable, Striped Heel, Antiskid, Striped', 37, 10, 'https://i.dummyjson.com/data/products/48/1.jpg'),
-(1001, 'Chappals & Shoe Ladies Metallic', '23.00', 'Womens Chappals & Shoe Ladies Metallic Tong Thong Sandal Flat Summer 2020 Maasai Sandals', 100, 10, 'https://i.dummyjson.com/data/products/49/1.jpg'),
+(1001, 'Chappals & Shoe Ladies Metallic', '23.00', 'Womens Chappals & Shoe Ladies Metallic Tong Thong Sandal Flat Summer 2020 Maasai Sandals', 76, 10, 'https://i.dummyjson.com/data/products/49/1.jpg'),
 (1002, 'Women Shoes', '36.00', '2020 New Arrivals Genuine Leather Fashion Trend Platform Summer Women Shoes', 59, 10, 'https://i.dummyjson.com/data/products/50/1.jpeg'),
 (1003, 'half sleeves T shirts', '23.00', 'Many store is creating new designs and trend every month and every year. Daraz.pk have a beautiful range of men fashion brands', 36, 11, 'https://i.dummyjson.com/data/products/51/1.png'),
 (1004, 'FREE FIRE T Shirt', '10.00', 'quality and professional print - It doesn\'t just look high quality, it is high quality.', 13, 11, 'https://i.dummyjson.com/data/products/52/1.png'),
@@ -383,19 +472,63 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`IdRoles`, `NombreRol`) VALUES
-(1, 'Administrador'),
-(2, 'Cliente');
+(0, 'Cliente'),
+(1, 'Administrador');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `usuario_carrito`
+--
+
+CREATE TABLE `usuario_carrito` (
+  `usuario_carrito_id` int(11) NOT NULL,
+  `cliente_id` int(11) NOT NULL,
+  `producto_id` int(11) NOT NULL,
+  `cantidad_productos` int(11) NOT NULL,
+  `total` decimal(10,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `usuario_producto`
+--
+
+CREATE TABLE `usuario_producto` (
+  `usuario_producto_id` int(11) NOT NULL,
+  `cliente_id` int(11) NOT NULL,
+  `producto_id` int(11) NOT NULL,
+  `cantidad_productos` int(11) NOT NULL,
+  `total` decimal(10,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `usuario_producto`
+--
+
+INSERT INTO `usuario_producto` (`usuario_producto_id`, `cliente_id`, `producto_id`, `cantidad_productos`, `total`) VALUES
+(1, 12, 954, 3, '2697.00'),
+(2, 12, 960, 1, '1499.00'),
+(3, 12, 953, 1, '549.00'),
+(4, 12, 982, 2, '60.00'),
+(5, 12, 977, 2, '140.00'),
+(6, 12, 980, 1, '20.00'),
+(8, 12, 962, 2, '2198.00'),
+(9, 12, 1010, 1, '57.00'),
+(10, 12, 1045, 1, '1050.00'),
+(12, 12, 970, 1, '40.00'),
+(13, 12, 971, 2, '92.00'),
+(14, 12, 984, 1, '50.00'),
+(15, 12, 1008, 1, '40.00'),
+(17, 12, 991, 1, '600.00'),
+(18, 12, 969, 1, '12.00'),
+(19, 12, 988, 1, '90.00'),
+(20, 12, 965, 2, '26.00');
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `carritos`
---
-ALTER TABLE `carritos`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `cliente_id` (`cliente_id`);
 
 --
 -- Indexes for table `categorias`
@@ -409,13 +542,6 @@ ALTER TABLE `categorias`
 ALTER TABLE `clientes`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `idx_clientes_email` (`correo`);
-
---
--- Indexes for table `detalle_carritos`
---
-ALTER TABLE `detalle_carritos`
-  ADD PRIMARY KEY (`carrito_id`),
-  ADD KEY `producto_id` (`producto_id`);
 
 --
 -- Indexes for table `detalle_facturas`
@@ -445,14 +571,24 @@ ALTER TABLE `roles`
   ADD PRIMARY KEY (`IdRoles`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Indexes for table `usuario_carrito`
 --
+ALTER TABLE `usuario_carrito`
+  ADD PRIMARY KEY (`usuario_carrito_id`),
+  ADD KEY `producto_id` (`producto_id`),
+  ADD KEY `detalle_carritos_ibfk_1` (`cliente_id`);
 
 --
--- AUTO_INCREMENT for table `carritos`
+-- Indexes for table `usuario_producto`
 --
-ALTER TABLE `carritos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `usuario_producto`
+  ADD PRIMARY KEY (`usuario_producto_id`),
+  ADD KEY `usuario_curso_ibfk_1` (`cliente_id`),
+  ADD KEY `usuario_curso_ibfk_2` (`producto_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
 
 --
 -- AUTO_INCREMENT for table `categorias`
@@ -464,7 +600,7 @@ ALTER TABLE `categorias`
 -- AUTO_INCREMENT for table `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `facturas`
@@ -485,21 +621,20 @@ ALTER TABLE `roles`
   MODIFY `IdRoles` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `usuario_carrito`
+--
+ALTER TABLE `usuario_carrito`
+  MODIFY `usuario_carrito_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+
+--
+-- AUTO_INCREMENT for table `usuario_producto`
+--
+ALTER TABLE `usuario_producto`
+  MODIFY `usuario_producto_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `carritos`
---
-ALTER TABLE `carritos`
-  ADD CONSTRAINT `carritos_ibfk_1` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id`);
-
---
--- Constraints for table `detalle_carritos`
---
-ALTER TABLE `detalle_carritos`
-  ADD CONSTRAINT `detalle_carritos_ibfk_1` FOREIGN KEY (`carrito_id`) REFERENCES `carritos` (`id`),
-  ADD CONSTRAINT `detalle_carritos_ibfk_2` FOREIGN KEY (`producto_id`) REFERENCES `productos` (`id`);
 
 --
 -- Constraints for table `detalle_facturas`
@@ -519,6 +654,20 @@ ALTER TABLE `facturas`
 --
 ALTER TABLE `productos`
   ADD CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`categoria_id`) REFERENCES `categorias` (`id`);
+
+--
+-- Constraints for table `usuario_carrito`
+--
+ALTER TABLE `usuario_carrito`
+  ADD CONSTRAINT `detalle_carritos_ibfk_1` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id`),
+  ADD CONSTRAINT `detalle_carritos_ibfk_2` FOREIGN KEY (`producto_id`) REFERENCES `productos` (`id`);
+
+--
+-- Constraints for table `usuario_producto`
+--
+ALTER TABLE `usuario_producto`
+  ADD CONSTRAINT `usuario_producto_ibfk_1` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id`),
+  ADD CONSTRAINT `usuario_producto_ibfk_2` FOREIGN KEY (`producto_id`) REFERENCES `productos` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

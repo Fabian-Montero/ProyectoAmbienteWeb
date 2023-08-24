@@ -96,6 +96,23 @@
         CloseBD($enlace);
         return $respuesta;
     }
+
+    function cargarProductosMantenimientoM()
+    {
+        $enlace = OpenBD();
+        $sentencia = "CALL cargarProductosMantenimiento()";
+        $respuesta = $enlace -> query($sentencia);
+        CloseBD($enlace);
+        return $respuesta;
+    }
+
+    function consultarProductosMantenimientoM(){
+        $enlace = OpenBD();
+        $sentencia = "CALL consultarProductosMantenimiento()";
+        $respuesta = $enlace -> query($sentencia);
+        CloseBD($enlace);
+        return $respuesta;
+    }
     
     
     

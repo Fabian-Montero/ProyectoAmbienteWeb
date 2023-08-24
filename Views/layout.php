@@ -117,7 +117,6 @@ function mostrarHeader()
                                 <li class="submenu">
                                     <a href="javascript:;">Páginas</a>
                                     <ul>
-                                        <li><a href="about.php">Sobre Nosotros</a></li>
                                         <li><a href="products.php?cat_id=150">Productos</a></li>
                                         <li><a href="categories.php">Categorías</a></li>
                                         <li><a href="compras.php">Mis Compras</a></li>
@@ -136,6 +135,7 @@ function mostrarHeader()
                                     <a href="javascript:;">Gestionar</a>
                                     <ul>
                                         <li><a href="Gestionar_usuarios.php">Usuario</a></li>
+                                        <li><a href="mantenimientoProductos.php">Productos</a></li>
                                     </ul>
                                 </li>
                                 '?>
