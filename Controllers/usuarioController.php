@@ -143,6 +143,127 @@
     }
 
 
+    function cargarUsuariosMantenimiento(){
+    
+        $respuesta = cargarUsuariosMantenimientoM();
+        $_SESSION["cantidadUsuariosMantenimiento"] = 0;
+        //Hay que llamar a un procedimiento que haga el count de los usuarios
+        if ($respuesta-> num_rows > 0)
+        {
+            while($usuario = mysqli_fetch_array($respuesta)){
+                echo
+                '
+                <form role="form" class="text-start action="" method="post">
+                <div class=" row mb-4 d-flex justify-content-between align-items-center">
+                                                    
+                    <div class="col-md-2 col-lg-2 col-xl-2">
+                        <h6 class="text-muted">' . $usuario["nombre"] . '&nbsp; ' . $usuario["apellido"]. '</h6>
+                    </div>
+                    <div class="col-md-3 col-lg-3 col-xl-3 ml-3">
+                        <h6 class="text-black mb-0">' . $usuario["correo"] . '</h6>
+                    </div>
+                    <div>
+                        <h6 class="text-black mt-0">Activo</h6>
+                        <input class="mb-3"type="text" disabled size="1" id="txtCantidadStock" value="' . $usuario["activo"] . '" name="txtCantidadStock" min="1" max="99" />
+                        <input type="hidden"  name= "txtIdUsuario" id="txtIdUsuario" value= " '. $usuario["id"] . '  "/>
+                        <button style="margin-left:100px ; border: none ; background: none;"type="submit" name="btnEliminarUsuario" id="btnEliminarUsuario"class="btn-icon">
+                        <span class="material-symbols-outlined">
+                            delete
+                        </span>
+                        </button>
+                        <a style="margin-left: 15px; color: #3B3B3B" href="editarUsuario.php?usuario='.$usuario["id"].'"name="btnEditarUsuario" id="btnEditarUsuario">
+                            <span class="material-symbols-outlined">
+                                edit
+                            </span>
+                        </a>
+                        </div>
+                    <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1 mr-5">
+                        <h6 class="text-black mt-0">Usuario</h6>
+                        <h6 style="font-size: 15px"class="ml-4 mb-3 mt-2">' . $usuario["IdRoles"] . '</h6>
+                    </div>
+                </div>
+                </form>
+                <hr class="my-4">
+                <style>
+                .scrollCarrito {
+                    width: 1400px; 
+                    height: 800px; 
+                    overflow: auto;
+                }
+                </style>
+                '; }}
+            }    
+    
+
+
+
+    function editarUsuario($idUsuario){
+    
+        $respuesta = cargarEditarUsuarioM($idUsuario);
+        if ($respuesta-> num_rows > 0)
+        {
+            $usuario = mysqli_fetch_array($respuesta);
+            
+                echo
+                '
+                <form role="form" class="text-start action="" method="post">
+                <div class=" row mb-4 d-flex justify-content-between align-items-center">
+                                                    
+                    <div class="col-md-2 col-lg-2 col-xl-2">
+                        <input size="5" type="text" id="txtNombreUsuario" name="txtNombreUsuario" class="text-muted" value="' . $usuario["nombre"]. '"></input>
+                        <input size="13" type="text" id="txtApellidoUsuario" name="txtApellidoUsuario" class="text-muted mt-2" value="' . $usuario["apellido"]. '"></input>
+                    </div>
+                    <div class="col-md-3 col-lg-3 col-xl-3 ml-2">
+                        <input size="30" type="email" id="txtCorreoUsuario" name="txtCorreoUsuario" class="text-black mb-0" value="' . $usuario["correo"] . '"></input>
+                    </div>
+                    <div class="ml-5">
+                        <h6 class="text-black mt-2 ml-4">Activo</h6>
+                        <input class="mb-4 ml-4"type="text" size="1" id="txtActivoUsuario" value="' . $usuario["activo"] . '" name="txtActivoUsuario" min="1" max="99" />
+                        <input type="hidden"  name= "txtIdUsuario" id="txtIdUsuario" value= " '. $usuario["id"] . '  "/>
+                    
+
+                        </div>
+                    <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                        <h6 class="text-black mb-1">Usuario</h6>
+                        <input class="mr-3 mb-3"type="text" size="1" id="txtRolUsuario" value="' . $usuario["IdRoles"] . '" name="txtRolUsuario" min="1" max="99" />
+                    </div>
+
+                    <button style="margin-right: 30px; color: #3B3B3B ; border: none ; background: none;" type="submit" name="btnEditarUsuario" id="btnEditarUsuario">
+                        <span class="material-symbols-outlined">
+                            done
+                        </span>
+                    </button>
+                </div>
+                </form>
+                <hr class="my-4">
+                <style>
+                .scrollCarrito {
+                    width: 1400px; 
+                    height: 800px; 
+                    overflow: auto;
+                }
+                </style>
+                '; }}
+
+    if(isset($_POST["btnEditarUsuario"]))
+    {
+        $nombreUsuario = $_POST["txtNombreUsuario"];
+        $apellidoUsuario = $_POST["txtApellidoUsuario"];
+        $correoUsuario = $_POST["txtCorreoUsuario"];
+        $activoUsuario = $_POST["txtActivoUsuario"];
+        $rolUsuario = $_POST["txtRolUsuario"];
+        $idUsuario = $_POST["txtIdUsuario"];
+
+        editarUsuarioMantenimientoM($nombreUsuario, $apellidoUsuario, $correoUsuario, $activoUsuario, $rolUsuario, $idUsuario);
+    }
+
+    if(isset($_POST["btnEliminarUsuario"]))
+    {
+        $idUsuario = $_POST["txtIdUsuario"];
+        eliminarUsuarioMantenimientoM($idUsuario);
+    }
+
+
     function randomPassword() {
         $alphabet = '1234567890abcdefghijklmnopqrstuvwxyz';
         $pass = array();

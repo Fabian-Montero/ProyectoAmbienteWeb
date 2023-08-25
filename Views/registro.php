@@ -47,7 +47,7 @@ include_once '../Controllers/usuarioController.php';
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
 						<input class="input100" id="txtCorreo" name="txtCorreo" type="email">
 						<span class="focus-input100"></span>
-						<span class="label-input100">Email</span>
+						<span class="label-input100">Correo Electrónico</span>
 					</div>
 					
 					
@@ -60,13 +60,13 @@ include_once '../Controllers/usuarioController.php';
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
 						<input class="input100" id="txtApellidos" name="txtApellidos" type="text">
 						<span class="focus-input100"></span>
-						<span class="label-input100">Apellidos</span>
+						<span class="label-input100">Apellido</span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
 						<input class="input100" id="txtPais" name="txtPais" type="text">
 						<span class="focus-input100"></span>
-						<span class="label-input100">Pais</span>
+						<span class="label-input100">País</span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Password is required">

@@ -106,12 +106,36 @@
         return $respuesta;
     }
 
+    function cargarEditarProductoM($idProducto)
+    {
+        $enlace = OpenBD();
+        $sentencia = "CALL cargarEditarProducto('$idProducto')";
+        $respuesta = $enlace -> query($sentencia);
+        CloseBD($enlace);
+        return $respuesta;
+    }
+
     function consultarProductosMantenimientoM(){
         $enlace = OpenBD();
         $sentencia = "CALL consultarProductosMantenimiento()";
         $respuesta = $enlace -> query($sentencia);
         CloseBD($enlace);
         return $respuesta;
+    }
+
+    function editarProductoMantenimientoM($nombreProducto, $idCategoria, $cantidadStock, $precioProducto, $idProducto)
+    {
+        $enlace = OpenBD();
+        $sentecia = "CALL editarProductoMantenimiento('$nombreProducto', '$idCategoria', '$cantidadStock', '$precioProducto', '$idProducto')";
+        $enlace -> query($sentecia);
+        CloseBD($enlace);
+    }  
+
+    function eliminarProductoMantenimientoM($idProducto){
+        $enlace = OpenBD();
+        $sentencia = "CALL eliminarProductoMantenimiento('$idProducto')";
+        $enlace -> query($sentencia);
+        CloseBD($enlace);
     }
     
     

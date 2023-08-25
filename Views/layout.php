@@ -70,7 +70,6 @@ function mostrarHeader()
                                     <ul>
                                         <form action="" method="post"> 
                                         <li><a href="#" onclick="cerrarSesion();">Cerrar Sesión</a></li>
-                                        <li><a href="single-product.php">Cambiar Contraseña</a></li>
                                         </form>
                                     </ul>
                                 </li>
@@ -127,14 +126,13 @@ function mostrarHeader()
                                     <ul>
                                         <form action="" method="post"> 
                                         <li><a href="#" onclick="cerrarSesion();">Cerrar Sesión</a></li>
-                                        <li><a href="single-product.php">Cambiar Contraseña</a></li>
                                         </form>
                                     </ul>
                                 </li>
                                 <li class="submenu">
                                     <a href="javascript:;">Gestionar</a>
                                     <ul>
-                                        <li><a href="Gestionar_usuarios.php">Usuario</a></li>
+                                        <li><a href="mantenimientoUsuarios.php">Usuario</a></li>
                                         <li><a href="mantenimientoProductos.php">Productos</a></li>
                                     </ul>
                                 </li>

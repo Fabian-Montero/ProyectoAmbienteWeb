@@ -100,4 +100,41 @@
         }
     }
 
+
+    function cargarUsuariosMantenimientoM()
+    {
+        $enlace = OpenBD();
+        $sentecia = "CALL cargarUsuarios()";
+        $respuesta = $enlace -> query($sentecia);
+        CloseBD($enlace);
+        return $respuesta;
+    } 
+
+    function cargarEditarUsuarioM($idUsuario)
+    {
+        $enlace = OpenBD();
+        $sentecia = "CALL cargarEditarUsuario('$idUsuario')";
+        $respuesta = $enlace -> query($sentecia);
+        CloseBD($enlace);
+        return $respuesta;
+    } 
+
+    function editarUsuarioMantenimientoM($nombreUsuario, $apellidoUsuario, $correoUsuario, $activoUsuario, $rolUsuario, $idUsuario)
+    {
+        $enlace = OpenBD();
+        $sentecia = "CALL editarUsuarioMantenimiento('$nombreUsuario', '$apellidoUsuario', '$correoUsuario', '$activoUsuario', '$rolUsuario', '$idUsuario')";
+        $respuesta = $enlace -> query($sentecia);
+        CloseBD($enlace);
+        return $respuesta;
+    } 
+
+    function eliminarUsuarioMantenimientoM($idUsuario)
+    {
+        $enlace = OpenBD();
+        $sentecia = "CALL eliminarUsuarioMantenimiento('$idUsuario')";
+        $respuesta = $enlace -> query($sentecia);
+        CloseBD($enlace);
+    } 
+
+
 ?>

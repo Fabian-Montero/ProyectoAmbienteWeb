@@ -70,6 +70,7 @@ function cargarProductosMantenimiento(){
             '
             <form role="form" class="text-start action="" method="post">
             <div class=" row mb-4 d-flex justify-content-between align-items-center">
+                                                
                                                 <div class="col-md-2 col-lg-2 col-xl-2">
                                                     <img src=' . $producto["url_imagen"] . '
                                                         class="img-fluid rounded-3" alt="Cotton T-shirt">
@@ -81,16 +82,16 @@ function cargarProductosMantenimiento(){
                                                 <div>
                                                     <input type="text" disabled size="1" id="txtCantidadStock" value="' . $producto["cantidad_stock"] . '" name="txtCantidadStock" min="1" max="99" />
                                                     <input type="hidden"  name= "txtIdProducto" id="txtIdProducto" value= " '. $producto["idProducto"] . '  "/>
-                                                    <button style="margin-left:130px;"type="submit" name="btnEliminar" id="btnEliminar"class="btn-icon">
+                                                    <button style="margin-left:130px ; border: none ; background: none;"type="submit" name="btnEliminarProducto" id="btnEliminarProducto"class="btn-icon">
                                                     <span class="material-symbols-outlined">
-                                                    delete
+                                                        delete
                                                     </span>
                                                     </button>
-                                                    <button style="margin-left: 5px;" type="submit" name="btnEditarProducto" id="btnEditarProducto" class="btn-icon">
+                                                    <a style="margin-left: 15px; color: #3B3B3B" href="editarProducto.php?producto='.$producto["idProducto"].'"name="btnEditarProducto" id="btnEditarProducto">
                                                         <span class="material-symbols-outlined">
                                                             edit
                                                         </span>
-                                                    </button>
+                                                    </a>
                                         
                                                     
 
@@ -112,7 +113,51 @@ function cargarProductosMantenimiento(){
             '; }}
         }    
 
+        function editarProducto($idProducto){
+    
+            $respuesta = cargarEditarProductoM($idProducto);
+            if ($respuesta-> num_rows > 0)
+            {
+                $producto = mysqli_fetch_array($respuesta);
+                
+                    echo
+                    '
+                    <form role="form" class="text-start action="" method="post">
+                        <div class=" row mb-3 d-flex justify-content-between align-items-center">
+                            <div class="col-md-4 col-lg-2 col-xl-2">
+                                <img src=' . $producto["url_imagen"] . '
+                                    class="img-fluid rounded-3" alt="Cotton T-shirt">
+                            </div>
+                            <div class="col-md-3 col-lg-3 col-xl-3">
+                                <input style="margin-bottom: 10px;" type="text" name= "txtNombreProducto" id="txtNombreProducto" class="text-black " value= "' . $producto["nombreProducto"] . '"></input>
+                                <input type="number" name= "txtIdCategoria" id="txtIdCategoria" class="text-black" value= "' . $producto["nombre_categoria"] . '"></input>
+                            </div>
+                            <div>
+                                <input type="number"  size="1" id="txtCantidadStock" value="' . $producto["cantidad_stock"] . '" name="txtCantidadStock" min="1" max="99" />
+                                <input type="hidden"  name= "txtIdProducto" id="txtIdProducto" value= " '. $producto["idProducto"] . '  "/>
+                                
+                            </div>
+                            <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                                <input  size="5" type="text" style="font-size: 15px" name= "txtPrecioProducto" id="txtPrecioProducto" class="text-black ml-2" value= "' . $producto["precio"] . '"></input>
+                            </div>
+                            <button style="margin-right: 30px; color: #3B3B3B ; border: none ; background: none;" type="submit" name="btnEditarProducto" id="btnEditarProducto">
+                                <span class="material-symbols-outlined">
+                                    done
+                                </span>
+                                </button>
+                        </div>
+                        </form>
+                        <hr class="my-4">
 
+                        <style>
+                        .scrollCarrito {
+                        width: 1400px; 
+                        height: 800px; 
+                        overflow: auto;
+                        }
+                        </style>
+                    '; }}
+                
 
 function cargarProductosCategorias($categoria){
     $respuesta = cargarProductosCategoriasM($categoria);
@@ -363,6 +408,24 @@ if(isset($_POST["search-button"]))
         $total = $cantidad * $precioProducto;
 
         agregarCarritoM($idProducto, $idUsuario, $cantidad, $total);
+        
+    }
+
+    if(isset($_POST["btnEditarProducto"]))
+    {
+        $nombreProducto = $_POST["txtNombreProducto"];
+        $idCategoria = $_POST["txtIdCategoria"];
+        $cantidadStock = $_POST["txtCantidadStock"];
+        $precioProducto = $_POST["txtPrecioProducto"];
+        $idProducto = $_POST["txtIdProducto"];
+
+        editarProductoMantenimientoM($nombreProducto, $idCategoria, $cantidadStock, $precioProducto, $idProducto);
+    }
+
+    if(isset($_POST["btnEliminarProducto"]))
+    {
+        $idProducto = $_POST["txtIdProducto"];
+        eliminarProductoMantenimientoM($idProducto);
         
     }
 

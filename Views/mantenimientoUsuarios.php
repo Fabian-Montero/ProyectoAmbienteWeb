@@ -31,6 +31,8 @@
     <link rel="stylesheet" href="assets/css/lightbox.css">
 
     <link rel="stylesheet" href="assets/css/carrito.css">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0" />
     <!--
 
 TemplateMo 571 Hexashop
@@ -65,8 +67,8 @@ https://templatemo.com/tm-571-hexashop
             <div class="row">
                 <div class="col-lg-12">
                     <div class="inner-content">
-                        <h2>Tus compras</h2>
-                        <span>Aquí podrá encontrar el historial de todos los productos que ha comprado en la tienda</span>
+                        <h2>Mantenimiento Usuarios</h2>
+                        <span>Bienvenido al mantenimiento de usuarios</span>
                     </div>
                 </div>
             </div>
@@ -75,7 +77,7 @@ https://templatemo.com/tm-571-hexashop
     <!-- ***** Main Banner Area End ***** -->
 
     <?php
-        consultarDetalleComprasCantidad();
+        consultarProductosMantenimiento();
     ?>
 
     <div class="about-us">
@@ -94,8 +96,7 @@ https://templatemo.com/tm-571-hexashop
                                         <div class="col-lg-12">
                                             <div class="p-5">
                                                 <div class="  d-flex justify-content-between align-items-center mb-5">
-                                                    <h1 class="fw-bold mb-0 text-black">Compras</h1>
-                                                    <h6 class="mb-0 text-muted"> <?php echo $_SESSION["cantidadCompras"];?> items</h6>
+                                                    <h1 class="fw-bold mb-0 text-black">Usuarios</h1>
                                                     <h6 class="mb-0"><a href="../Views/home.php" class="text-body"><i
                                                                 class="fas fa-long-arrow-alt-left me-2"></i>Volver al inicio</a></h6>
                                                 </div>
@@ -103,7 +104,7 @@ https://templatemo.com/tm-571-hexashop
 
                                                 <!-- Inicio producto carrito -->
                                                 <?php
-                                                consultarDetalleCompras();
+                                                cargarUsuariosMantenimiento();
                                                 ?>
 
                                                 <!-- Final producto carrito  -->

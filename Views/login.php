@@ -64,7 +64,7 @@
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
 						<input class="input100" id="txtCorreo" name="txtCorreo" type="email">
 						<span class="focus-input100"></span>
-						<span class="label-input100">Email</span>
+						<span class="label-input100">Correo Electrónico</span>
 					</div>
 					
 					
@@ -79,7 +79,7 @@
 
 						<div>
 							<a href="recuperar.php" class="txt1">
-								Olvidaste la contraseña?
+								¿Olvidaste la contraseña?
 							</a>
 						</div>
 					</div>
